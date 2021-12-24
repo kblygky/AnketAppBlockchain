@@ -1,0 +1,522 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="anketAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tblAnket">
+          <Key>
+            <PropertyRef Name="anketId" />
+          </Key>
+          <Property Name="anketId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kategoriId" Type="int" />
+          <Property Name="anketAd" Type="varchar" MaxLength="50" />
+          <Property Name="aciklama" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tblBlock">
+          <Key>
+            <PropertyRef Name="blockId" />
+          </Key>
+          <Property Name="blockId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="oyId" Type="int" />
+          <Property Name="blockNo" Type="int" />
+          <Property Name="nonce" Type="int" />
+          <Property Name="prevHash" Type="varchar(max)" />
+          <Property Name="blockHash" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tblKategori">
+          <Key>
+            <PropertyRef Name="kategoriId" />
+          </Key>
+          <Property Name="kategoriId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kategoriAd" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblKullanici">
+          <Key>
+            <PropertyRef Name="kId" />
+          </Key>
+          <Property Name="kId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tc" Type="varchar" MaxLength="50" />
+          <Property Name="sifre" Type="nchar" MaxLength="10" />
+          <Property Name="adSoyad" Type="varchar" MaxLength="50" />
+          <Property Name="tel" Type="varchar" MaxLength="50" />
+          <Property Name="adres" Type="varchar" MaxLength="50" />
+          <Property Name="yas" Type="int" />
+          <Property Name="ogrenimDurum" Type="varchar" MaxLength="50" />
+          <Property Name="durum" Type="int" />
+          <Property Name="mail" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblOy">
+          <Key>
+            <PropertyRef Name="oyId" />
+          </Key>
+          <Property Name="oyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kId" Type="int" />
+          <Property Name="secenekId" Type="int" />
+          <Property Name="oyTarih" Type="date" />
+        </EntityType>
+        <EntityType Name="tblSecenek">
+          <Key>
+            <PropertyRef Name="secenekId" />
+          </Key>
+          <Property Name="secenekId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="anketId" Type="int" />
+          <Property Name="secenek" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'anketApp.dbo.anketListe' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="anketListe">
+          <Property Name="anketAd" Type="varchar" MaxLength="50" />
+          <Property Name="aciklama" Type="varchar(max)" />
+          <Property Name="kategoriAd" Type="varchar" MaxLength="50" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'anketApp.dbo.blockListe' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="blockListe">
+          <Property Name="adSoyad" Type="varchar" MaxLength="50" />
+          <Property Name="tc" Type="varchar" MaxLength="50" />
+          <Property Name="nonce" Type="int" />
+          <Property Name="prevHash" Type="varchar(max)" />
+          <Property Name="blockHash" Type="varchar(max)" />
+          <Property Name="oyTarih" Type="date" />
+          <Property Name="anketAd" Type="varchar" MaxLength="50" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'anketApp.dbo.genc' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="genc">
+          <Property Name="adSoyad" Type="varchar" MaxLength="50" />
+          <Property Name="yas" Type="varchar" MaxLength="50" />
+          <Property Name="adres" Type="varchar" MaxLength="50" />
+          <Property Name="tel" Type="varchar" MaxLength="50" />
+        </EntityType>-->
+        <Association Name="FK_tblAnket_tblKategori">
+          <End Role="tblKategori" Type="Self.tblKategori" Multiplicity="0..1" />
+          <End Role="tblAnket" Type="Self.tblAnket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKategori">
+              <PropertyRef Name="kategoriId" />
+            </Principal>
+            <Dependent Role="tblAnket">
+              <PropertyRef Name="kategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBlock_tblOy">
+          <End Role="tblOy" Type="Self.tblOy" Multiplicity="0..1" />
+          <End Role="tblBlock" Type="Self.tblBlock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOy">
+              <PropertyRef Name="oyId" />
+            </Principal>
+            <Dependent Role="tblBlock">
+              <PropertyRef Name="oyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOy_tblKullanici">
+          <End Role="tblKullanici" Type="Self.tblKullanici" Multiplicity="0..1" />
+          <End Role="tblOy" Type="Self.tblOy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKullanici">
+              <PropertyRef Name="kId" />
+            </Principal>
+            <Dependent Role="tblOy">
+              <PropertyRef Name="kId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOy_tblSecenek">
+          <End Role="tblSecenek" Type="Self.tblSecenek" Multiplicity="0..1" />
+          <End Role="tblOy" Type="Self.tblOy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSecenek">
+              <PropertyRef Name="secenekId" />
+            </Principal>
+            <Dependent Role="tblOy">
+              <PropertyRef Name="secenekId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSecenek_tblAnket">
+          <End Role="tblAnket" Type="Self.tblAnket" Multiplicity="0..1" />
+          <End Role="tblSecenek" Type="Self.tblSecenek" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAnket">
+              <PropertyRef Name="anketId" />
+            </Principal>
+            <Dependent Role="tblSecenek">
+              <PropertyRef Name="anketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="blockGetir" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="blockNo" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="adSoyad" Type="varchar" MaxLength="50" />
+                <Property Name="tc" Type="varchar" MaxLength="50" />
+                <Property Name="nonce" Type="int" />
+                <Property Name="prevHash" Type="varchar(max)" />
+                <Property Name="blockHash" Type="varchar(max)" />
+                <Property Name="oyTarih" Type="date" />
+                <Property Name="anketAd" Type="varchar" MaxLength="50" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="kategoriAnketSayi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="kullaniciAnketSayi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="kId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="kullaniciSayisi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="anketAppModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAnket" EntityType="Self.tblAnket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBlock" EntityType="Self.tblBlock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblKategori" EntityType="Self.tblKategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblKullanici" EntityType="Self.tblKullanici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOy" EntityType="Self.tblOy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSecenek" EntityType="Self.tblSecenek" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblAnket_tblKategori" Association="Self.FK_tblAnket_tblKategori">
+            <End Role="tblKategori" EntitySet="tblKategori" />
+            <End Role="tblAnket" EntitySet="tblAnket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBlock_tblOy" Association="Self.FK_tblBlock_tblOy">
+            <End Role="tblOy" EntitySet="tblOy" />
+            <End Role="tblBlock" EntitySet="tblBlock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOy_tblKullanici" Association="Self.FK_tblOy_tblKullanici">
+            <End Role="tblKullanici" EntitySet="tblKullanici" />
+            <End Role="tblOy" EntitySet="tblOy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOy_tblSecenek" Association="Self.FK_tblOy_tblSecenek">
+            <End Role="tblSecenek" EntitySet="tblSecenek" />
+            <End Role="tblOy" EntitySet="tblOy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSecenek_tblAnket" Association="Self.FK_tblSecenek_tblAnket">
+            <End Role="tblAnket" EntitySet="tblAnket" />
+            <End Role="tblSecenek" EntitySet="tblSecenek" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="anketAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tblAnket">
+          <Key>
+            <PropertyRef Name="anketId" />
+          </Key>
+          <Property Name="anketId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kategoriId" Type="Int32" />
+          <Property Name="anketAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblKategori" Relationship="Self.FK_tblAnket_tblKategori" FromRole="tblAnket" ToRole="tblKategori" />
+          <NavigationProperty Name="tblSecenek" Relationship="Self.FK_tblSecenek_tblAnket" FromRole="tblAnket" ToRole="tblSecenek" />
+        </EntityType>
+        <EntityType Name="tblBlock">
+          <Key>
+            <PropertyRef Name="blockId" />
+          </Key>
+          <Property Name="blockId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="oyId" Type="Int32" />
+          <Property Name="blockNo" Type="Int32" />
+          <Property Name="nonce" Type="Int32" />
+          <Property Name="prevHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="blockHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblOy" Relationship="Self.FK_tblBlock_tblOy" FromRole="tblBlock" ToRole="tblOy" />
+        </EntityType>
+        <EntityType Name="tblKategori">
+          <Key>
+            <PropertyRef Name="kategoriId" />
+          </Key>
+          <Property Name="kategoriId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kategoriAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblAnket" Relationship="Self.FK_tblAnket_tblKategori" FromRole="tblKategori" ToRole="tblAnket" />
+        </EntityType>
+        <EntityType Name="tblKullanici">
+          <Key>
+            <PropertyRef Name="kId" />
+          </Key>
+          <Property Name="kId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sifre" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="adSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="adres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="yas" Type="Int32" />
+          <Property Name="ogrenimDurum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="durum" Type="Int32" />
+          <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblOy" Relationship="Self.FK_tblOy_tblKullanici" FromRole="tblKullanici" ToRole="tblOy" />
+        </EntityType>
+        <EntityType Name="tblOy">
+          <Key>
+            <PropertyRef Name="oyId" />
+          </Key>
+          <Property Name="oyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kId" Type="Int32" />
+          <Property Name="secenekId" Type="Int32" />
+          <Property Name="oyTarih" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tblBlock" Relationship="Self.FK_tblBlock_tblOy" FromRole="tblOy" ToRole="tblBlock" />
+          <NavigationProperty Name="tblKullanici" Relationship="Self.FK_tblOy_tblKullanici" FromRole="tblOy" ToRole="tblKullanici" />
+          <NavigationProperty Name="tblSecenek" Relationship="Self.FK_tblOy_tblSecenek" FromRole="tblOy" ToRole="tblSecenek" />
+        </EntityType>
+        <EntityType Name="tblSecenek">
+          <Key>
+            <PropertyRef Name="secenekId" />
+          </Key>
+          <Property Name="secenekId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="anketId" Type="Int32" />
+          <Property Name="secenek" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblAnket" Relationship="Self.FK_tblSecenek_tblAnket" FromRole="tblSecenek" ToRole="tblAnket" />
+          <NavigationProperty Name="tblOy" Relationship="Self.FK_tblOy_tblSecenek" FromRole="tblSecenek" ToRole="tblOy" />
+        </EntityType>
+        <Association Name="FK_tblAnket_tblKategori">
+          <End Role="tblKategori" Type="Self.tblKategori" Multiplicity="0..1" />
+          <End Role="tblAnket" Type="Self.tblAnket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKategori">
+              <PropertyRef Name="kategoriId" />
+            </Principal>
+            <Dependent Role="tblAnket">
+              <PropertyRef Name="kategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSecenek_tblAnket">
+          <End Role="tblAnket" Type="Self.tblAnket" Multiplicity="0..1" />
+          <End Role="tblSecenek" Type="Self.tblSecenek" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAnket">
+              <PropertyRef Name="anketId" />
+            </Principal>
+            <Dependent Role="tblSecenek">
+              <PropertyRef Name="anketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBlock_tblOy">
+          <End Role="tblOy" Type="Self.tblOy" Multiplicity="0..1" />
+          <End Role="tblBlock" Type="Self.tblBlock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOy">
+              <PropertyRef Name="oyId" />
+            </Principal>
+            <Dependent Role="tblBlock">
+              <PropertyRef Name="oyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOy_tblKullanici">
+          <End Role="tblKullanici" Type="Self.tblKullanici" Multiplicity="0..1" />
+          <End Role="tblOy" Type="Self.tblOy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKullanici">
+              <PropertyRef Name="kId" />
+            </Principal>
+            <Dependent Role="tblOy">
+              <PropertyRef Name="kId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOy_tblSecenek">
+          <End Role="tblSecenek" Type="Self.tblSecenek" Multiplicity="0..1" />
+          <End Role="tblOy" Type="Self.tblOy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSecenek">
+              <PropertyRef Name="secenekId" />
+            </Principal>
+            <Dependent Role="tblOy">
+              <PropertyRef Name="secenekId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="anketAppEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="tblAnket" EntityType="Self.tblAnket" />
+          <EntitySet Name="tblBlock" EntityType="Self.tblBlock" />
+          <EntitySet Name="tblKategori" EntityType="Self.tblKategori" />
+          <EntitySet Name="tblKullanici" EntityType="Self.tblKullanici" />
+          <EntitySet Name="tblOy" EntityType="Self.tblOy" />
+          <EntitySet Name="tblSecenek" EntityType="Self.tblSecenek" />
+          <AssociationSet Name="FK_tblAnket_tblKategori" Association="Self.FK_tblAnket_tblKategori">
+            <End Role="tblKategori" EntitySet="tblKategori" />
+            <End Role="tblAnket" EntitySet="tblAnket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSecenek_tblAnket" Association="Self.FK_tblSecenek_tblAnket">
+            <End Role="tblAnket" EntitySet="tblAnket" />
+            <End Role="tblSecenek" EntitySet="tblSecenek" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBlock_tblOy" Association="Self.FK_tblBlock_tblOy">
+            <End Role="tblOy" EntitySet="tblOy" />
+            <End Role="tblBlock" EntitySet="tblBlock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOy_tblKullanici" Association="Self.FK_tblOy_tblKullanici">
+            <End Role="tblKullanici" EntitySet="tblKullanici" />
+            <End Role="tblOy" EntitySet="tblOy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOy_tblSecenek" Association="Self.FK_tblOy_tblSecenek">
+            <End Role="tblSecenek" EntitySet="tblSecenek" />
+            <End Role="tblOy" EntitySet="tblOy" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="anketAppModelStoreContainer" CdmEntityContainer="anketAppEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="anketAppModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAnket">
+            <EntityTypeMapping TypeName="anketAppModel.tblAnket">
+              <MappingFragment StoreEntitySet="tblAnket">
+                <ScalarProperty Name="anketId" ColumnName="anketId" />
+                <ScalarProperty Name="kategoriId" ColumnName="kategoriId" />
+                <ScalarProperty Name="anketAd" ColumnName="anketAd" />
+                <ScalarProperty Name="aciklama" ColumnName="aciklama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBlock">
+            <EntityTypeMapping TypeName="anketAppModel.tblBlock">
+              <MappingFragment StoreEntitySet="tblBlock">
+                <ScalarProperty Name="blockId" ColumnName="blockId" />
+                <ScalarProperty Name="oyId" ColumnName="oyId" />
+                <ScalarProperty Name="blockNo" ColumnName="blockNo" />
+                <ScalarProperty Name="nonce" ColumnName="nonce" />
+                <ScalarProperty Name="prevHash" ColumnName="prevHash" />
+                <ScalarProperty Name="blockHash" ColumnName="blockHash" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblKategori">
+            <EntityTypeMapping TypeName="anketAppModel.tblKategori">
+              <MappingFragment StoreEntitySet="tblKategori">
+                <ScalarProperty Name="kategoriId" ColumnName="kategoriId" />
+                <ScalarProperty Name="kategoriAd" ColumnName="kategoriAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblKullanici">
+            <EntityTypeMapping TypeName="anketAppModel.tblKullanici">
+              <MappingFragment StoreEntitySet="tblKullanici">
+                <ScalarProperty Name="kId" ColumnName="kId" />
+                <ScalarProperty Name="tc" ColumnName="tc" />
+                <ScalarProperty Name="sifre" ColumnName="sifre" />
+                <ScalarProperty Name="adSoyad" ColumnName="adSoyad" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="adres" ColumnName="adres" />
+                <ScalarProperty Name="yas" ColumnName="yas" />
+                <ScalarProperty Name="ogrenimDurum" ColumnName="ogrenimDurum" />
+                <ScalarProperty Name="durum" ColumnName="durum" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOy">
+            <EntityTypeMapping TypeName="anketAppModel.tblOy">
+              <MappingFragment StoreEntitySet="tblOy">
+                <ScalarProperty Name="oyId" ColumnName="oyId" />
+                <ScalarProperty Name="kId" ColumnName="kId" />
+                <ScalarProperty Name="secenekId" ColumnName="secenekId" />
+                <ScalarProperty Name="oyTarih" ColumnName="oyTarih" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSecenek">
+            <EntityTypeMapping TypeName="anketAppModel.tblSecenek">
+              <MappingFragment StoreEntitySet="tblSecenek">
+                <ScalarProperty Name="secenekId" ColumnName="secenekId" />
+                <ScalarProperty Name="anketId" ColumnName="anketId" />
+                <ScalarProperty Name="secenek" ColumnName="secenek" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
