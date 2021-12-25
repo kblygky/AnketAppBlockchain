@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HackatonAnketApp.classes;
+using HackatonAnketApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,26 +12,59 @@ namespace HackatonAnketApp.Controllers
     {
         public ActionResult Index()
         {
+            
+            Connect connect = new Connect();
+
+            /*-------------------REGISTER----------------------*/
+            string tc = "11030516850";
+            string password = "asd123";
+            string name = "Kubilay Gökay";
+            string tel = "5312441068";
+            string address = "izmir";
+            int age = 21;
+            string education = "üniversite";
+            int rank = 0;
+            string mail = "kubilayogge110@gmail.com";
+            
+            /*------------------------------------*/
+            /*---------------OY VERME-------------*/
+            int uId = 1;
+            int chooseId = 1;
+            DateTime Date = DateTime.Now;
+
+            int blockNo = 1;
+            int nonce = 2344;
+            string prevHash = "öncekiskdjflksdjfkljsdflkjdslkfjksd";
+            string blockHash = "sondakijsdfkldjflksdklfdksfldksfjkd";
+            /*------------------------------------*/
+
+            //kullanıcı ekleme
+            //connect.AddUser(tc, password, name, tel, address, age, education, rank, mail);
+
+            //anket ekleme
+            //connect.AddQuest(categoryId,questName,questInfo);
+
+
             return View();
         }
+        
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "";
 
             return View();
         }
         public ActionResult ToListD()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }
