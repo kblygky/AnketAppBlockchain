@@ -181,6 +181,22 @@ warning 6013: The table/view 'anketApp.dbo.genc' does not have a primary key def
         <Function Name="kullaniciAnketSayi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="kId" Type="int" Mode="In" />
         </Function>
+        <Function Name="kullaniciBlockGetir" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="kId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="adSoyad" Type="varchar" MaxLength="50" />
+                <Property Name="tc" Type="varchar" MaxLength="50" />
+                <Property Name="nonce" Type="int" />
+                <Property Name="prevHash" Type="varchar(max)" />
+                <Property Name="blockHash" Type="varchar(max)" />
+                <Property Name="oyTarih" Type="date" />
+                <Property Name="anketAd" Type="varchar" MaxLength="50" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="kullaniciSayisi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -246,6 +262,24 @@ warning 6013: The table/view 'anketApp.dbo.genc' does not have a primary key def
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="anketAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="blockGetir_Result">
+          <Property Name="adSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nonce" Type="Int32" />
+          <Property Name="prevHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="blockHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="oyTarih" Type="DateTime" />
+          <Property Name="anketAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </ComplexType>
+        <ComplexType Name="kullaniciBlockGetir_Result">
+          <Property Name="adSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nonce" Type="Int32" />
+          <Property Name="prevHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="blockHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="oyTarih" Type="DateTime" />
+          <Property Name="anketAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </ComplexType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -385,7 +419,7 @@ warning 6013: The table/view 'anketApp.dbo.genc' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="anketAppEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="anketAppEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="tblAnket" EntityType="Self.tblAnket" />
           <EntitySet Name="tblBlock" EntityType="Self.tblBlock" />
@@ -413,13 +447,61 @@ warning 6013: The table/view 'anketApp.dbo.genc' does not have a primary key def
             <End Role="tblSecenek" EntitySet="tblSecenek" />
             <End Role="tblOy" EntitySet="tblOy" />
           </AssociationSet>
+          <FunctionImport Name="blockGetir" IsComposable="true" ReturnType="Collection(anketAppModel.blockGetir_Result)">
+            <Parameter Name="blockNo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="kullaniciBlockGetir" IsComposable="true" ReturnType="Collection(anketAppModel.kullaniciBlockGetir_Result)">
+            <Parameter Name="kId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="kategoriAnketSayi" ReturnType="Collection(anketAppModel.kategoriAnketSayi_Result)" />
+          <FunctionImport Name="kullaniciAnketSayi" ReturnType="Collection(anketAppModel.kullaniciAnketSayi_Result)">
+            <Parameter Name="kId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
+        <ComplexType Name="kategoriAnketSayi_Result">
+          <Property Type="String" Name="kategoriAd" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Kategorinin_Anket_Sayısı" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="kullaniciAnketSayi_Result">
+          <Property Type="String" Name="adSoyad" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Katıldığı_Anket_Sayısı" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="anketAppModelStoreContainer" CdmEntityContainer="anketAppEntities">
+        <EntityContainerMapping StorageEntityContainer="anketAppModelStoreContainer" CdmEntityContainer="anketAppEntities3">
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="anketAppModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -496,6 +578,55 @@ warning 6013: The table/view 'anketApp.dbo.genc' does not have a primary key def
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionName="anketAppModel.Store.blockGetir" FunctionImportName="blockGetir">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="anketAppModel.blockGetir_Result">
+                <ScalarProperty Name="adSoyad" ColumnName="adSoyad" />
+                <ScalarProperty Name="tc" ColumnName="tc" />
+                <ScalarProperty Name="nonce" ColumnName="nonce" />
+                <ScalarProperty Name="prevHash" ColumnName="prevHash" />
+                <ScalarProperty Name="blockHash" ColumnName="blockHash" />
+                <ScalarProperty Name="oyTarih" ColumnName="oyTarih" />
+                <ScalarProperty Name="anketAd" ColumnName="anketAd" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="anketAppModel.Store.kullaniciBlockGetir" FunctionImportName="kullaniciBlockGetir">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="anketAppModel.kullaniciBlockGetir_Result">
+                <ScalarProperty Name="adSoyad" ColumnName="adSoyad" />
+                <ScalarProperty Name="tc" ColumnName="tc" />
+                <ScalarProperty Name="nonce" ColumnName="nonce" />
+                <ScalarProperty Name="prevHash" ColumnName="prevHash" />
+                <ScalarProperty Name="blockHash" ColumnName="blockHash" />
+                <ScalarProperty Name="oyTarih" ColumnName="oyTarih" />
+                <ScalarProperty Name="anketAd" ColumnName="anketAd" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="kategoriAnketSayi" FunctionName="anketAppModel.Store.kategoriAnketSayi">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="anketAppModel.kategoriAnketSayi_Result">
+                <ScalarProperty Name="kategoriAd" ColumnName="kategoriAd" />
+                <ScalarProperty Name="Kategorinin_Anket_Sayısı" ColumnName="Kategorinin Anket Sayısı" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="kullaniciAnketSayi" FunctionName="anketAppModel.Store.kullaniciAnketSayi">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="anketAppModel.kullaniciAnketSayi_Result">
+                <ScalarProperty Name="adSoyad" ColumnName="adSoyad" />
+                <ScalarProperty Name="Katıldığı_Anket_Sayısı" ColumnName="Katıldığı Anket Sayısı" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="anketAppModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="anketAppModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="anketAppModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="anketAppModel.Store.sp_helpdiagramdefinition" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="anketAppModel.Store.sp_helpdiagrams" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="anketAppModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="anketAppModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

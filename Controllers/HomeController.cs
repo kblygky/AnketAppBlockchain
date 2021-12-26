@@ -26,6 +26,8 @@ namespace HackatonAnketApp.Controllers
             int rank = 0;
             string mail = "kubilayogge110@gmail.com";
 
+            //var list =connect.ReturnQuestList();
+           // var list = connect.ReturnUserBlocks(7);
             /*------------------------------------*/
             /*---------------OY VERME-------------*/
             //int uId = 7;

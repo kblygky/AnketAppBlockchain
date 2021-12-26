@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c8652d97ffdb436993385031bd57e9d9" Name="Diagram1">
-        <EntityTypeShape EntityType="anketAppModel.sysdiagrams" Width="1.5" PointX="1.5" PointY="3.875" IsExpanded="true" />
+      <Diagram DiagramId="7583c6fe4fdd47acbf4c28c7275ccd5c" Name="Diagram1">
+        <EntityTypeShape EntityType="anketAppModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="anketAppModel.tblAnket" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="anketAppModel.tblBlock" Width="1.5" PointX="9.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="anketAppModel.tblKategori" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="anketAppModel.tblKullanici" Width="1.5" PointX="5.125" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="anketAppModel.tblKategori" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="anketAppModel.tblKullanici" Width="1.5" PointX="5.75" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="anketAppModel.tblOy" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="anketAppModel.tblSecenek" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="anketAppModel.tblSecenek" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="anketAppModel.FK_tblAnket_tblKategori" ManuallyRouted="false" />
         <AssociationConnector Association="anketAppModel.FK_tblSecenek_tblAnket" ManuallyRouted="false" />
         <AssociationConnector Association="anketAppModel.FK_tblBlock_tblOy" ManuallyRouted="false" />

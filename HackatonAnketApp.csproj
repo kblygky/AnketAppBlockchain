@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="classes\Connect.cs" />
+    <Compile Include="classes\FullBlock.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -147,6 +148,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AnketAppModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\blockGetir_Result.cs">
+      <DependentUpon>AnketAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\kategoriAnketSayi_Result.cs">
+      <DependentUpon>AnketAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\kullaniciAnketSayi_Result.cs">
+      <DependentUpon>AnketAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\kullaniciBlockGetir_Result.cs">
+      <DependentUpon>AnketAppModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>AnketAppModel.tt</DependentUpon>
@@ -182,8 +195,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Models\AnketAppModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AnketAppModel.Context.cs</LastGenOutput>
       <DependentUpon>AnketAppModel.edmx</DependentUpon>
+      <LastGenOutput>AnketAppModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\AnketAppModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

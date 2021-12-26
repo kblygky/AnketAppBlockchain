@@ -9,7 +9,7 @@ namespace HackatonAnketApp.classes
 {
     public class Connect
     {
-        anketAppEntities db = new anketAppEntities();
+        anketAppEntities3 db = new anketAppEntities3();
 
         /*kullanıcı kayıt olma kısmı*/
         public void AddUser(string tc, string password, string name, string tel, string address, int age, string education, int rank, string mail)
@@ -83,26 +83,54 @@ namespace HackatonAnketApp.classes
                 return null;
             }
         }
-        /*
-            tblBlock block = new tblBlock()
-            {
-                blockNo = blockNo,
-                nonce = nonce,
-                prevHash = prevHash,
-                blockHash = blockHash,
-                tblOy=vote
-            };
-         */
-        public List<tblBlock> ReturnUserBlocks(int uId)
+
+        public List<tblAnket> ReturnQuestList()
         {
-            List<tblBlock> blocks = new List<tblBlock>();
+            var Quests = db.tblAnket.ToList();
+            foreach (var item in Quests)
+            {
+                item.tblSecenek = db.tblSecenek.Where(x => x.anketId == item.anketId).ToList();
+            }
+
+            return Quests;
+        }
+
+        public List<FullBlock> ReturnUserBlocks(int uId)
+        {
+            List<FullBlock> blocks = new List<FullBlock>();
 
             var votes = db.tblOy.Where(x => x.kId == uId).ToList();
             foreach (var item in votes)
             {
                 
+                var block = db.tblBlock.FirstOrDefault(x => x.oyId == item.oyId);
+                var option = db.tblSecenek.FirstOrDefault(x => x.secenekId ==item.secenekId);
+                var quest = db.tblAnket.FirstOrDefault(x => x.anketId == option.anketId);
+                FullBlock fullBlock = new FullBlock()
+                {
+                    voteId = item.oyId,
+                    userId = Convert.ToInt32( item.kId),
+                    optionId = Convert.ToInt32(item.secenekId),
+                    optionStr= option.secenek,
+                    questId= Convert.ToInt32(option.anketId),
+                    questName=quest.anketAd,
+                    date = Convert.ToDateTime( item.oyTarih),
+                    blockNo = Convert.ToInt32(block.blockNo),
+                    nonce = Convert.ToInt32(block.nonce),
+                    prevHash = block.prevHash,
+                    blockHash = block.blockHash
+                };
+                blocks.Add(fullBlock);
             }
+            return blocks;
+        }    
 
-        }
+        //public List<FullBlock> ReturnQuestChain(int questId) 
+        //{
+        //    var option = db.tblSecenek.FirstOrDefault(x => x.anketId == questId);
+
+
+        //    return null;
+        //}
     }
 }
