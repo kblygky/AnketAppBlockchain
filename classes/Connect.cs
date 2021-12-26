@@ -30,21 +30,34 @@ namespace HackatonAnketApp.classes
             db.tblKullanici.Add(user);
             db.SaveChanges();
         }
-        /*kullanıcının oy verme kısmı*/
-        public void AddVote(int uId, int chooseId, DateTime Date, int blockNo, int nonce, string prevHash, string blockHash)
-        {/*
+        public void AddVote(int uId, int chooseId, DateTime date, int nonce, string blockHash)
+        {
             tblOy vote = new tblOy()
             {
                 kId = uId,
                 secenekId = chooseId,
-                oyTarih = Date
+                oyTarih = date,
             };
-            tblBlock block = new tblBlock();*/
+
+            
+            int blockNo = 1;//veritabanından çekilicek son blockun numarası çekilicek
+            string prevHash = "öncekiskdjflksdjfkljsdflkjdslkfjksd";//veritabanından son blocuk prevhashi çekilicek
+
+            tblBlock block = new tblBlock()
+            {
+                blockNo = blockNo,
+                nonce = nonce,
+                prevHash = prevHash,
+                blockHash = blockHash,
+                tblOy=vote
+            };
+
+            db.tblBlock.Add(block);
+            db.SaveChanges();
         }
 
         public void AddQuest(int categoryId,string questName,string questInfo ,List<tblSecenek> options)
         {
-            
 
             tblAnket quest = new tblAnket() {
                 kategoriId = categoryId,
@@ -56,11 +69,6 @@ namespace HackatonAnketApp.classes
             db.tblAnket.Add(quest);
             db.SaveChanges();
         }
-
-       /* public List<tblAnket> listQuest()
-        {
-            
-        }*/
 
     }
 }
