@@ -25,7 +25,7 @@ namespace HackatonAnketApp.Controllers
             string education = "üniversite";
             int rank = 0;
             string mail = "kubilayogge110@gmail.com";
-            
+
             /*------------------------------------*/
             /*---------------OY VERME-------------*/
             //int uId = 7;
@@ -67,7 +67,17 @@ namespace HackatonAnketApp.Controllers
 
 
 
-            
+            //login kontrol 
+            //tblKullanici user = connect.CheckLogin(mail, password);
+            //if (user!=null)
+            //{
+            //    Session["k_id"] = user.kId;
+            //    //return RedirectToAction("Urunler");
+            //}
+            //else
+            //{
+            //    ViewBag.hata = "hatalı giriş";
+            //}
 
 
 
@@ -79,14 +89,12 @@ namespace HackatonAnketApp.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "";
-
             return View();
         }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "";
-
             return View();
         }
         public ActionResult ToListD()

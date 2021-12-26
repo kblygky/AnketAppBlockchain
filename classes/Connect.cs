@@ -70,5 +70,39 @@ namespace HackatonAnketApp.classes
             db.SaveChanges();
         }
 
+        public tblKullanici  CheckLogin(string mail,string password)
+        {
+            var user = db.tblKullanici.FirstOrDefault(a => a.mail == mail&& a.sifre==password);
+
+            if (user != null)
+            {
+                return user;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        /*
+            tblBlock block = new tblBlock()
+            {
+                blockNo = blockNo,
+                nonce = nonce,
+                prevHash = prevHash,
+                blockHash = blockHash,
+                tblOy=vote
+            };
+         */
+        public List<tblBlock> ReturnUserBlocks(int uId)
+        {
+            List<tblBlock> blocks = new List<tblBlock>();
+
+            var votes = db.tblOy.Where(x => x.kId == uId).ToList();
+            foreach (var item in votes)
+            {
+                
+            }
+
+        }
     }
 }
