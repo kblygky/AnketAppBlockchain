@@ -49,7 +49,8 @@ namespace HackatonAnketApp.classes
             tblAnket quest = new tblAnket() {
                 kategoriId = categoryId,
                 anketAd=questName,
-                aciklama=questInfo
+                aciklama=questInfo,
+                tblSecenek=options
             };
 
             db.tblAnket.Add(quest);

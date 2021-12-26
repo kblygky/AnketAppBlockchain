@@ -41,8 +41,21 @@ namespace HackatonAnketApp.Controllers
             //kullanıcı ekleme
             //connect.AddUser(tc, password, name, tel, address, age, education, rank, mail);
 
+            
+
+
+            /*seçenek ekleme*/
+            //string optionStr = "sad";
+            //List<tblSecenek> options = new List<tblSecenek>();
+            //tblSecenek option = new tblSecenek()
+            //{
+            //    secenek = optionStr
+            //};
+            //options.Add(option);
+
             //anket ekleme
-            //connect.AddQuest(categoryId,questName,questInfo);
+            //connect.AddQuest(categoryId,questName,questInfo,options);
+
 
 
             return View();
