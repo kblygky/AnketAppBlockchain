@@ -30,6 +30,7 @@ namespace HackatonAnketApp.classes
             db.tblKullanici.Add(user);
             db.SaveChanges();
         }
+
         public void AddVote(int uId, int chooseId, DateTime date, int nonce, string blockHash)
         {
             tblOy vote = new tblOy()

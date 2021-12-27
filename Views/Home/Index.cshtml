@@ -2,30 +2,64 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<section id="contend">
+    <div class="container px-4 py-5">
+        <h2 class="pb-2 border-bottom">Anketler</h2>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+
+        <!-- Anket Başlangıc-->
+        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-3">
+            @using HackatonAnketApp.Models;
+
+            @model List<tblAnket>
+            @foreach (var item in Model)
+            {
+
+                <!-- Modal Triger-->
+
+                <div class="col-md-4" data-bs-toggle="modal" data-bs-target="#exampleModal_@item.anketId">
+                    <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-3 shadow-lg">
+                        <div class="d-flex flex-column h-100 px-3 py-5 text-white text-shadow-1">
+                            <h2 class="display-6 lh-1 fw-bold">@item.anketAd</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Başlagnıc-->
+                <div class="modal fade" id="exampleModal_@item.anketId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <form action="islem.html">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">@item.anketAd</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>@item.aciklama</p>
+                                    <!-- Secimler Başlangıc -->
+
+                                    @foreach (var option in item.tblSecenek)
+                                    {
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" value="id_1" id="flexRadioDefault_@option.secenekId" checked>
+                                            <label class="form-check-label" for="flexRadioDefault_@option.secenekId">
+                                                @option.secenek
+                                            </label>
+                                        </div>
+                                    }
+                                    <!-- Secimler Bitiş -->
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                                    <input type="submit" class="btn btn-primary" value="Seçimi onayla">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Modal Bitiş -->
+            }
+        </div>
+        <!-- Anket Bitiş-->
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+</section>

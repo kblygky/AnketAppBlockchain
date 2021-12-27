@@ -1,0 +1,68 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="etr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <!-- Bootstrap  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+    <!-- JQuery Input Mask-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7-beta.29/jquery.inputmask.min.js" integrity="sha512-Ax4+qW2rAVWrk3SU1ef/L8O0jF6vKSfaMIR3du6efzf5v/pibzDcLFx29YCeR7WphoPO4zranQFsFUf+9Rb+dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Local -->
+    <link rel="stylesheet" href="~/style/login-style.css">
+
+</head>
+<body class="bg-light">
+    <div class="d-flex justify-content-center align-items-center mt-5">
+        <div class="card">
+            <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                <li class="nav-item text-center">
+                    <a class="nav-link active btl" id="login-tab" data-bs-toggle="pill" href="#login" role="tab" aria-controls="login" aria-selected="true">Giriş</a>
+                </li>
+                <li class="nav-item text-center">
+                    <a class="nav-link btr" id="singin-tab" data-bs-toggle="pill" href="#singin" role="tab" aria-controls="singin" aria-selected="false">Kayıt</a>
+                </li>
+            </ul>
+            <div class="tab-content  py-3 px-4" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                    <div class="form">
+                        <form action="/Login/BtnLogin" method="post">
+                            <input type="text" name="mail" class="form-control" placeholder="Mail" required>
+                            <input type="text" name="password" class="form-control" placeholder="Şifre" required>
+                            <button type="submit" class="btn btn-primary btn-block">Giriş</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="singin" role="tabpanel" aria-labelledby="singin-tab">
+                    <div class="form">
+                        <form action="/Login/BtnRegister" method="post">
+                            <input type="text" name="name" class="form-control" placeholder="Ad Soyad" required>
+                            <input type="text" name="tc" class="form-control" placeholder="TC" required>
+                            <input type="text" name="tel" class="form-control" placeholder="Telefon" required>
+                            <input type="text" name="address" class="form-control" placeholder="Adres" required>
+                            <input type="text" name="age" class="form-control" placeholder="Yaş" required>
+                            <input type="text" name="education" class="form-control" placeholder="Öğrenim Durumu">
+                            <input type="text" name="mail" class="form-control" placeholder="Mail" required>
+                            <input type="password" name="password" class="form-control" placeholder="Şifre" required>
+                            <button type="submit" class="btn btn-primary btn-block">Kayıt Ol</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+</html>
