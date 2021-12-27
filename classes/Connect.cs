@@ -14,7 +14,7 @@ namespace HackatonAnketApp.classes
         /*kullanıcı kayıt olma kısmı*/
         public void AddUser(string tc, string password, string name, string tel, string address, int age, string education, int rank, string mail)
         {
-            
+
             tblKullanici user = new tblKullanici()
             {
                 tc = tc,
@@ -39,7 +39,7 @@ namespace HackatonAnketApp.classes
                 oyTarih = date,
             };
 
-            
+
             int blockNo = 1;//veritabanından çekilicek son blockun numarası çekilicek
             string prevHash = "öncekiskdjflksdjfkljsdflkjdslkfjksd";//veritabanından son blocuk prevhashi çekilicek
 
@@ -49,30 +49,31 @@ namespace HackatonAnketApp.classes
                 nonce = nonce,
                 prevHash = prevHash,
                 blockHash = blockHash,
-                tblOy=vote
+                tblOy = vote
             };
 
             db.tblBlock.Add(block);
             db.SaveChanges();
         }
 
-        public void AddQuest(int categoryId,string questName,string questInfo ,List<tblSecenek> options)
+        public void AddQuest(int categoryId, string questName, string questInfo, List<tblSecenek> options)
         {
 
-            tblAnket quest = new tblAnket() {
+            tblAnket quest = new tblAnket()
+            {
                 kategoriId = categoryId,
-                anketAd=questName,
-                aciklama=questInfo,
-                tblSecenek=options
+                anketAd = questName,
+                aciklama = questInfo,
+                tblSecenek = options
             };
 
             db.tblAnket.Add(quest);
             db.SaveChanges();
         }
 
-        public tblKullanici  CheckLogin(string mail,string password)
+        public tblKullanici CheckLogin(string mail, string password)
         {
-            var user = db.tblKullanici.FirstOrDefault(a => a.mail == mail&& a.sifre==password);
+            var user = db.tblKullanici.FirstOrDefault(a => a.mail == mail && a.sifre == password);
 
             if (user != null)
             {
@@ -102,19 +103,19 @@ namespace HackatonAnketApp.classes
             var votes = db.tblOy.Where(x => x.kId == uId).ToList();
             foreach (var item in votes)
             {
-                
+
                 var block = db.tblBlock.FirstOrDefault(x => x.oyId == item.oyId);
-                var option = db.tblSecenek.FirstOrDefault(x => x.secenekId ==item.secenekId);
+                var option = db.tblSecenek.FirstOrDefault(x => x.secenekId == item.secenekId);
                 var quest = db.tblAnket.FirstOrDefault(x => x.anketId == option.anketId);
                 FullBlock fullBlock = new FullBlock()
                 {
                     voteId = item.oyId,
-                    userId = Convert.ToInt32( item.kId),
+                    userId = Convert.ToInt32(item.kId),
                     optionId = Convert.ToInt32(item.secenekId),
-                    optionStr= option.secenek,
-                    questId= Convert.ToInt32(option.anketId),
-                    questName=quest.anketAd,
-                    date = Convert.ToDateTime( item.oyTarih),
+                    optionStr = option.secenek,
+                    questId = Convert.ToInt32(option.anketId),
+                    questName = quest.anketAd,
+                    date = Convert.ToDateTime(item.oyTarih),
                     blockNo = Convert.ToInt32(block.blockNo),
                     nonce = Convert.ToInt32(block.nonce),
                     prevHash = block.prevHash,
@@ -123,14 +124,12 @@ namespace HackatonAnketApp.classes
                 blocks.Add(fullBlock);
             }
             return blocks;
-        }    
+        }
 
-        //public List<FullBlock> ReturnQuestChain(int questId) 
-        //{
-        //    var option = db.tblSecenek.FirstOrDefault(x => x.anketId == questId);
+        public List<FullBlock> ReturnQuestChain(int questId)
+        {
 
-
-        //    return null;
-        //}
+            return null;
+        }
     }
 }
