@@ -1,4 +1,5 @@
 ﻿
+using HackatonAnketApp.context;
 using HackatonAnketApp.Models;
 using System;
 using System.Collections.Generic;
@@ -90,6 +91,18 @@ namespace HackatonAnketApp.classes
                 return null;
             }
         }
+        public void UserUpdate(string tc, string password, string name, string tel, int age, string education, string mail,int uId)
+        {
+            tblKullanici user = db.tblKullanici.FirstOrDefault(x => x.kId == uId);
+            user.adSoyad = name;
+            user.tc = tc;
+            user.sifre = password;
+            user.tel = tel;
+            user.yas = age;
+            user.ogrenimDurum = education;
+            user.mail = mail;
+            db.SaveChanges();
+        }
 
         public List<tblAnket> ReturnQuestList()
         {
@@ -133,19 +146,65 @@ namespace HackatonAnketApp.classes
 
         public List<FullBlock> ReturnQuestChain(int questId)
         {
-            string query = "SELECT k.adSoyad, o.oyId, k.kId, s.secenekId, s.secenek, o.oyTarih, b.blockNo,b.nonce,a.anketId,a.anketAd,b.prevHash,b.blockHash " +
-                "FROM tblBlock AS b INNER JOIN " +
-                "tblOy AS o ON b.oyId = o.oyId INNER JOIN " +
-                "tblKullanici AS k ON o.kId = k.kId INNER JOIN " +
-                "tblSecenek AS s ON s.secenekId = o.secenekId INNER JOIN " +
-                "tblAnket AS a ON a.anketId = s.anketId where a.anketId=" + questId;
+            //string query = "SELECT k.adSoyad, o.oyId, k.kId, s.secenekId, s.secenek, o.oyTarih, b.blockNo,b.nonce,a.anketId,a.anketAd,b.prevHash,b.blockHash " +
+            //    "FROM tblBlock AS b INNER JOIN " +
+            //    "tblOy AS o ON b.oyId = o.oyId INNER JOIN " +
+            //    "tblKullanici AS k ON o.kId = k.kId INNER JOIN " +
+            //    "tblSecenek AS s ON s.secenekId = o.secenekId INNER JOIN " +
+            //    "tblAnket AS a ON a.anketId = s.anketId where a.anketId=" + questId;
+
+
+            //var deneme = db.tblBlock.SqlQuery(query).SingleOrDefaultAsync();
+
+            //var result =
+            //        from car in db.tblCars.Where(c => c.Id == carId)
+            //        join brand in db.tblBrands on car.BrandId equals brand.Id
+            //        join color in db.tblColors on car.ColorId equals color.Id
+            //        select new CarDetailDto
+            //        {
+            //            CarId = car.Id,
+            //            CarName = car.Name,
+            //            BrandName = brand.Name,
+            //            ColorName = color.Name,
+            //            DailyPrice = car.DailyPrice,
+            //            ModelYear = car.ModelYear
+            //        };
+            //return result.SingleOrDefault();
 
 
 
+            //var x = from block in db.Set<tblBlock>()
+            //            join oy in db.Set<tblOy>() on block.oyId equals oy.oyId
+            //            join kullanici in db.Set<tblKullanici>() on oy.kId equals kullanici.kId
+            //            join secenek in db.Set<tblSecenek>() on secenek.secenekId equals oy.secenekId
+            //            join anket in db.Set<tblAnket>() on anket.anketId equals secenek.anketId
+            //questId.ToString();
 
-            var deneme = db.tblBlock.SqlQuery(query).SingleOrDefaultAsync();
-
-            return null;
+            //using (FullBlockContext fullBlockContext = new FullBlockContext())
+            //{//s seçenek o oy a anket
+            //    var result =
+            //    from b in fullBlockContext.blocks
+            //    join o in fullBlockContext.votes on b.oyId equals o.oyId
+            //    join k in fullBlockContext.users on o.kId equals k.kId
+            //    join s in fullBlockContext.options on o.secenekId equals s.secenekId
+            //    join a in fullBlockContext.quests.Where(c => c.anketId == questId) on s.anketId equals a.anketId
+            //    select new FullBlock
+            //    {
+            //        voteId = o.oyId,
+            //        userId = k.kId,
+            //        optionId = o.oyId,
+            //        optionStr = s.secenek,
+            //        date = Convert.ToDateTime(o.oyTarih),
+            //        blockNo = Convert.ToInt32(b.blockNo),
+            //        nonce = Convert.ToInt32(b.nonce),
+            //        questId = a.anketId,
+            //        questName = a.anketAd,
+            //        prevHash = b.prevHash,
+            //        blockHash = b.blockHash
+            //    };
+            //    return result.ToList();
+            //}
+            
         }
     }
 }

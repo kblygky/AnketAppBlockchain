@@ -40,7 +40,10 @@
         </div>
         <!-- Modal -->
         <div class="modal fade" id="profilDuzenle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <form action="">
+
+            @using HackatonAnketApp.classes
+
+            <form action="/Login/BtnUpdate" method="post">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -50,31 +53,31 @@
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label class="form-label">Ad Soyad</label>
-                                <input type="text" class="form-control" required>
+                                <input name="name" type="text" class="form-control" value="@Session["uName"]" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">TC</label>
-                                <input type="text" class="form-control" required>
+                                <input name="tc" type="text" class="form-control" value="@Session["tc"]" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Tel</label>
-                                <input type="text" name="phone" class="form-control" required>
+                                <input type="text" name="tel" class="form-control" value="@Session["tel"]" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Yaş</label>
-                                <input type="text" class="form-control" required>
+                                <input name="age" type="text" class="form-control" value="@Session["age"]" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Öğrenim Durumu</label>
-                                <input type="text" class="form-control" required>
+                                <input name="education" type="text" class="form-control" value="@Session["education"]" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Email address</label>
-                                <input type="email" class="form-control" required>
+                                <input name="mail" type="email" class="form-control" value="@Session["mail"]" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Password</label>
-                                <input type="password" class="form-control" required>
+                                <input name="password" type="password" class="form-control" value="@Session["sifre"]" required>
                             </div>
 
                         </div>

@@ -23,6 +23,12 @@ namespace HackatonAnketApp.Controllers
                 
                 Session["uName"] = user.adSoyad;
                 Session["uId"] = user.kId;
+                Session["tc"] = user.tc;
+                Session["tel"] = user.tel;
+                Session["age"] = user.yas;
+                Session["education"] = user.ogrenimDurum;
+                Session["mail"] = user.mail;
+                Session["sifre"] = user.sifre;
             }
             else
             {
@@ -38,6 +44,14 @@ namespace HackatonAnketApp.Controllers
             Connect connect = new Connect();
             connect.AddUser(tc, password, name, tel, address, Convert.ToInt32(age), education, 0, mail);
 
+            return RedirectToAction("Login", "Home");
+        }
+        [HttpPost]
+        public ActionResult BtnUpdate(string tc, string password, string name, string tel, string age, string education, string mail)
+        {
+            Connect connect = new Connect();
+            connect.UserUpdate(tc, password, name, tel, Convert.ToInt32(age), education, mail, Convert.ToInt32(Session["uId"]));
+            Session.Clear();
             return RedirectToAction("Login", "Home");
         }
     }
