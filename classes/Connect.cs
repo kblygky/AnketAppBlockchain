@@ -14,7 +14,6 @@ namespace HackatonAnketApp.classes
         /*kullanıcı kayıt olma kısmı*/
         public void AddUser(string tc, string password, string name, string tel, string address, int age, string education, int rank, string mail)
         {
-
             tblKullanici user = new tblKullanici()
             {
                 tc = tc,
@@ -104,7 +103,6 @@ namespace HackatonAnketApp.classes
             var votes = db.tblOy.Where(x => x.kId == uId).ToList();
             foreach (var item in votes)
             {
-
                 var block = db.tblBlock.FirstOrDefault(x => x.oyId == item.oyId);
                 var option = db.tblSecenek.FirstOrDefault(x => x.secenekId == item.secenekId);
                 var quest = db.tblAnket.FirstOrDefault(x => x.anketId == option.anketId);
@@ -129,7 +127,6 @@ namespace HackatonAnketApp.classes
 
         public List<FullBlock> ReturnQuestChain(int questId)
         {
-
             return null;
         }
     }

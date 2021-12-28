@@ -1,0 +1,157 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<section id="contend">
+
+    <div class="container px-4 py-5 pb-3">
+
+        <h2 class="pb-2 border-bottom">
+            Anketler
+            <!-- Modal Triger-->
+            <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#anketEkle">
+                Anket Ekle
+            </button>
+        </h2>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="anketEkle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <form action="/Admin/BtnAddQuest" method="post">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Anket Ekle</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Anket Adı</label>
+                                    <input type="text" name="questName" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlTextarea1" class="form-label">Anket Yazısı</label>
+                                    <textarea class="form-control" name="questInfo" id="exampleFormControlTextarea1" rows="4"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Kategori</label>
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <input id="say" type="number" class="form-control" min="0">
+                                    </div>
+                                    <div class="col-auto">
+                                        <div id="secenekOlustur" onclick="olustur()" class="btn btn-primary mb-3">Oluştur</div>
+                                    </div>
+                                </div>
+                                <h5>Secenekler</h5>
+                                <hr>
+
+                                <textarea rows="4" cols="40" name="optionStr" placeholder="seçenekleri satır satır girin"></textarea>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                        <input type="submit" class="btn btn-primary" value="Ekle">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+
+        function olustur() {
+            $say = document.getElementById("say");
+            var tablo = document.getElementById("secenekler");
+            while (tablo.firstChild) {
+                tablo.removeChild(tablo.firstChild);
+            }
+
+            for (let i = 0; i < say.value; i++) {
+
+                var tablo = document.getElementById("secenekler");
+
+                var tr = document.createElement("tr");
+                tr.width = "100%";
+                var td = document.createElement("td");
+                td.width = "100%";
+                var input = document.createElement("input");
+                input.setAttribute("type", "text");
+                input.setAttribute("name", "secenek" + (i + 1));
+                input.setAttribute("id", "secenek" + (i + 1));
+                input.setAttribute("placeholder", "Secenek" + (i + 1));
+                input.setAttribute("class", "form-control mb-3");
+
+                td.appendChild(input);
+                tr.appendChild(td);
+                tablo.appendChild(tr);
+            }
+        }
+    </script>
+
+    <div class="container px-4">
+
+        <!-- Anket Başlangıc-->
+        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-3">
+
+            @using HackatonAnketApp.Models;
+
+            @model List<tblAnket>
+            @foreach (var item in Model)
+            {
+                <!-- Modal Triger-->
+                <div class="col-md-4" data-bs-toggle="modal" data-bs-target="#exampleModal_@item.anketId">
+                    <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-3 shadow-lg">
+                        <div class="d-flex flex-column h-100 px-3 py-5 text-white text-shadow-1">
+                            <h2 class="display-6 lh-1 fw-bold">@item.anketAd</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Başlagnıc-->
+                <div class="modal fade" id="exampleModal_@item.anketId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <form action="islem.html">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">@item.anketAd</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>@item.aciklama</p>
+                                    <!-- Secimler Başlangıc -->
+                                    @foreach (var option in item.tblSecenek)
+                                    {
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" value="id_@option.secenekId" id="flexRadioDefault_@option.secenekId" disabled>
+                                            <label class="form-check-label" for="flexRadioDefault_@option.secenekId">
+                                                @option.secenek
+                                            </label>
+                                        </div>
+                                    }
+
+                                    <!-- Secimler Bitiş -->
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Modal Bitiş -->
+
+            }
+
+        </div>
+        <!-- Anket Bitiş-->
+    </div>
+</section>
+

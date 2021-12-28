@@ -17,6 +17,7 @@ namespace HackatonAnketApp.Controllers
             ViewBag.Message = "";
             Connect connect = new Connect();
             var blocks = connect.ReturnUserBlocks(Convert.ToInt32(Session["uId"]));
+
             return View(blocks);
         }
     }

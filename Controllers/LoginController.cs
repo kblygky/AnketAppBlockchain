@@ -19,6 +19,8 @@ namespace HackatonAnketApp.Controllers
             var user = connect.CheckLogin(mail, password);
             if (user != null)
             {
+                if (user.durum==1)return RedirectToAction("Index", "Admin");
+                
                 Session["uName"] = user.adSoyad;
                 Session["uId"] = user.kId;
             }

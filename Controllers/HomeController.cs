@@ -13,12 +13,12 @@ namespace HackatonAnketApp.Controllers
         public ActionResult Index()
         {
             Connect connect = new Connect();
-            
+
 
 
             //var list =connect.ReturnQuestList();
 
-            
+
 
 
             /*------------------------------------*/
@@ -52,7 +52,7 @@ namespace HackatonAnketApp.Controllers
 
 
 
-            if (Session["uId"]==null)
+            if (Session["uId"] == null)
             {
                 return RedirectToAction("Login");
             }
@@ -70,6 +70,10 @@ namespace HackatonAnketApp.Controllers
             return View();
         }
 
-       
+        public ActionResult BtnExit()
+        {
+            Session.Clear();
+            return RedirectToAction("Login");
+        }
     }
 }
