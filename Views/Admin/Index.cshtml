@@ -39,20 +39,19 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Kategori</label>
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <input id="say" type="number" class="form-control" min="0">
-                                    </div>
-                                    <div class="col-auto">
-                                        <div id="secenekOlustur" onclick="olustur()" class="btn btn-primary mb-3">Oluştur</div>
-                                    </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Kategori</label>
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option selected>Open this select menu</option>
+                                        <option value="1">Siyasey</option>
+                                        <option value="2">Eylence</option>
+                                        <option value="3">ciddi</option>
+                                    </select>
+                                </div><div class="mb-3">
+                                    <label class="form-label">Seçenekler</label>
+
+                                    <textarea rows="4" cols="40" name="optionStr" placeholder="seçenekleri satır satır girin" class="form-control"></textarea>
                                 </div>
-                                <h5>Secenekler</h5>
-                                <hr>
-
-                                <textarea rows="4" cols="40" name="optionStr" placeholder="seçenekleri satır satır girin"></textarea>
-
                             </div>
                         </div>
                     </div>

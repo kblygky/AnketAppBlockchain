@@ -30,18 +30,24 @@ namespace HackatonAnketApp.classes
             db.SaveChanges();
         }
 
-        public void AddVote(int uId, int chooseId, DateTime date, int nonce, string blockHash)
+        public void AddVote(int uId, int chooseId,int questId)
         {
+
             tblOy vote = new tblOy()
             {
                 kId = uId,
                 secenekId = chooseId,
-                oyTarih = date,
+                oyTarih = DateTime.Now
             };
 
+            /*api ile çekilicek*/
+            int nonce = 1234532;
+            string blockHash= "sonraskdjflksdjfkljsdflkjdslkfjksd";
 
-            int blockNo = 1;//veritabanından çekilicek son blockun numarası çekilicek
-            string prevHash = "öncekiskdjflksdjfkljsdflkjdslkfjksd";//veritabanından son blocuk prevhashi çekilicek
+            /*veritabanından çekilicek son blockun numarası çekilicek*/
+            int blockNo = 1;
+            string prevHash = "öncekiskdjflksdjfkljsdflkjdslkfjksd";
+
 
             tblBlock block = new tblBlock()
             {
@@ -127,6 +133,18 @@ namespace HackatonAnketApp.classes
 
         public List<FullBlock> ReturnQuestChain(int questId)
         {
+            string query = "SELECT k.adSoyad, o.oyId, k.kId, s.secenekId, s.secenek, o.oyTarih, b.blockNo,b.nonce,a.anketId,a.anketAd,b.prevHash,b.blockHash " +
+                "FROM tblBlock AS b INNER JOIN " +
+                "tblOy AS o ON b.oyId = o.oyId INNER JOIN " +
+                "tblKullanici AS k ON o.kId = k.kId INNER JOIN " +
+                "tblSecenek AS s ON s.secenekId = o.secenekId INNER JOIN " +
+                "tblAnket AS a ON a.anketId = s.anketId where a.anketId=" + questId;
+
+
+
+
+            var deneme = db.tblBlock.SqlQuery(query).SingleOrDefaultAsync();
+
             return null;
         }
     }

@@ -7,16 +7,16 @@ namespace HackatonAnketApp.classes
 {
     public class FullBlock
     {
-        public int voteId { get; set; }
-        public int userId { get; set; }
-        public int optionId { get; set; }
-        public string optionStr { get; set; }
-        public DateTime date { get; set; }
-        public int blockNo { get; set; }
-        public int nonce { get; set; }
-        public int questId { get; set; }
-        public string questName { get; set; }
-        public string prevHash { get; set; }
-        public string blockHash { get; set; }
+        public int voteId { get; set; }//oyId
+        public int userId { get; set; }//kId
+        public int optionId { get; set; }//secenekId
+        public string optionStr { get; set; }//secenek
+        public DateTime date { get; set; }//oyTarih
+        public int blockNo { get; set; }//blockNo
+        public int nonce { get; set; }//nonce
+        public int questId { get; set; }//anketId
+        public string questName { get; set; }//AnketAd
+        public string prevHash { get; set; }//prevHash
+        public string blockHash { get; set; }//blockHash
     }
 }

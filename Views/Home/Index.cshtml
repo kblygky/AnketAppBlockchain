@@ -27,7 +27,7 @@
 
                 <!-- Modal Başlagnıc-->
                 <div class="modal fade" id="exampleModal_@item.anketId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <form action="islem.html">
+                    <form action="/Vote/AddVote" method="post">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -40,12 +40,13 @@
 
                                     @foreach (var option in item.tblSecenek)
                                     {
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" value="id_1" id="flexRadioDefault_@option.secenekId" checked>
-                                            <label class="form-check-label" for="flexRadioDefault_@option.secenekId">
-                                                @option.secenek
-                                            </label>
-                                        </div>
+                                <div class="form-check">
+                                    <input type="hidden" id="custId" name="questId" value="@item.anketId">
+                                    <input class="form-check-input" type="radio" name="optionId" value="@option.secenekId" id="flexRadioDefault_@option.secenekId" checked>
+                                    <label class="form-check-label" for="flexRadioDefault_@option.secenekId">
+                                        @option.secenek
+                                    </label>
+                                </div>
                                     }
                                     <!-- Secimler Bitiş -->
                                 </div>
@@ -60,6 +61,6 @@
                 <!-- Modal Bitiş -->
             }
         </div>
-        <!-- Anket Bitiş-->
     </div>
+    <!-- Anket Bitiş-->
 </section>

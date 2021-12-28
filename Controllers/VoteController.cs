@@ -20,5 +20,15 @@ namespace HackatonAnketApp.Controllers
 
             return View(blocks);
         }
+
+        [HttpPost]
+        public ActionResult AddVote(string optionId,string questId)
+        {
+            Connect connect = new Connect();
+            connect.AddVote(Convert.ToInt32(Session["uId"]), Convert.ToInt32(optionId), Convert.ToInt32(questId));
+
+            return RedirectToAction("MyVotes","Vote");
+        }
+
     }
 }
