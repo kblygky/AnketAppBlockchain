@@ -13,9 +13,9 @@ namespace HackatonAnketApp.Controllers
         public ActionResult Index()
         {
             Connect connect = new Connect();
-            var list=connect.ReturnQuestChain(2);
+            var list=connect.ReturnQuestChain(3);
 
-
+            int x = 1;
 
 
 

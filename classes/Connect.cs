@@ -206,44 +206,48 @@ namespace HackatonAnketApp.classes
             //    return x;
             //}
 
-            //var options = db.tblSecenek.Where(x => x.anketId == questId).ToList();
+            var options = db.tblSecenek.Where(x => x.anketId == questId).ToList();
 
-            //for (int i = options.Count()-1; i >=0 ; i--)
-            //{
-            //    options[i].tblOy= db.tblOy.Where(x => x.secenekId == options[i].secenekId).ToList();
-            //    if (options[i].tblOy.Count()==0)
-            //    {
-            //       // options.RemoveAt(i);
-            //    }
-            //}
+            foreach (var option in options)
+            {
+                option.tblOy = db.tblOy.Where(x => x.secenekId == option.secenekId).ToList();
+                foreach (var vote in option.tblOy)
+                {
+                    vote.tblBlock = db.tblBlock.Where(x => x.oyId == vote.oyId).ToList();
+                }
+            }
 
+            for (int i = options.Count() - 1; i >= 0; i--)
+            {
+                if (options[i].tblOy.Count == 0)
+                {
+                    options.RemoveAt(i);
+                }
+            }
 
+            List<FullBlock> chain = new List<FullBlock>();
 
+            foreach (var item in options)
+            {
+                string questName = db.tblAnket.Where(x => x.anketId == item.anketId).FirstOrDefault().anketAd;
+                FullBlock block = new FullBlock()
+                {
+                    voteId = item.secenekId,
+                    userId =Convert.ToInt32( item.tblOy.First().kId),
+                    optionId=item.secenekId,
+                    optionStr=item.secenek,
+                    date=item.tblOy.First().oyTarih,
+                    blockNo= Convert.ToInt32(item.tblOy.First().tblBlock.First().oyId),
+                    nonce= Convert.ToInt32(item.tblOy.First().tblBlock.First().nonce),
+                    questId=Convert.ToInt32( item.anketId),
+                    questName=questName,
+                    prevHash= item.tblOy.First().tblBlock.First().prevHash,
+                    blockHash= item.tblOy.First().tblBlock.First().blockHash
+                };
+                chain.Add(block);
+            }
 
-
-
-
-            //foreach (var option in options)
-            //{
-            //    option.tblOy = db.tblOy.Where(x => x.secenekId == option.secenekId).ToList();
-            //    foreach (var vote in option.tblOy)
-            //    {
-            //        vote.tblBlock = db.tblBlock.Where(x => x.oyId == vote.oyId).ToList();
-            //        //if oy 0 sill
-            //        if (true)
-            //        {
-
-            //        }
-            //    }
-            //}
-
-
-
-
-
-
-
-            return null;
+            return chain;
 
         }
     }
