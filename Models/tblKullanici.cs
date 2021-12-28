@@ -11,7 +11,8 @@ namespace HackatonAnketApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tblKullanici
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +20,7 @@ namespace HackatonAnketApp.Models
         {
             this.tblOy = new HashSet<tblOy>();
         }
-    
+        [Key]
         public int kId { get; set; }
         public string tc { get; set; }
         public string sifre { get; set; }

@@ -11,9 +11,11 @@ namespace HackatonAnketApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tblBlock
     {
+        [Key]
         public int blockId { get; set; }
         public Nullable<int> oyId { get; set; }
         public Nullable<int> blockNo { get; set; }

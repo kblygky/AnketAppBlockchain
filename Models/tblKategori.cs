@@ -11,7 +11,8 @@ namespace HackatonAnketApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tblKategori
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +20,7 @@ namespace HackatonAnketApp.Models
         {
             this.tblAnket = new HashSet<tblAnket>();
         }
-    
+        [Key]
         public int kategoriId { get; set; }
         public string kategoriAd { get; set; }
     

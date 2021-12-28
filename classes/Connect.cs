@@ -31,7 +31,7 @@ namespace HackatonAnketApp.classes
             db.SaveChanges();
         }
 
-        public void AddVote(int uId, int chooseId,int questId)
+        public void AddVote(int uId, int chooseId, int questId)
         {
 
             tblOy vote = new tblOy()
@@ -43,7 +43,7 @@ namespace HackatonAnketApp.classes
 
             /*api ile çekilicek*/
             int nonce = 1234532;
-            string blockHash= "sonraskdjflksdjfkljsdflkjdslkfjksd";
+            string blockHash = "sonraskdjflksdjfkljsdflkjdslkfjksd";
 
             /*veritabanından çekilicek son blockun numarası çekilicek*/
             int blockNo = 1;
@@ -91,7 +91,7 @@ namespace HackatonAnketApp.classes
                 return null;
             }
         }
-        public void UserUpdate(string tc, string password, string name, string tel, int age, string education, string mail,int uId)
+        public void UserUpdate(string tc, string password, string name, string tel, int age, string education, string mail, int uId)
         {
             tblKullanici user = db.tblKullanici.FirstOrDefault(x => x.kId == uId);
             user.adSoyad = name;
@@ -154,8 +154,8 @@ namespace HackatonAnketApp.classes
             //    "tblAnket AS a ON a.anketId = s.anketId where a.anketId=" + questId;
 
 
-            //var deneme = db.tblBlock.SqlQuery(query).SingleOrDefaultAsync();
-
+            //var deneme = db.tblBlock.SqlQuery(query).ToList();
+            //return null;
             //var result =
             //        from car in db.tblCars.Where(c => c.Id == carId)
             //        join brand in db.tblBrands on car.BrandId equals brand.Id
@@ -181,30 +181,70 @@ namespace HackatonAnketApp.classes
             //questId.ToString();
 
             //using (FullBlockContext fullBlockContext = new FullBlockContext())
-            //{//s seçenek o oy a anket
+            //{
             //    var result =
             //    from b in fullBlockContext.blocks
             //    join o in fullBlockContext.votes on b.oyId equals o.oyId
             //    join k in fullBlockContext.users on o.kId equals k.kId
             //    join s in fullBlockContext.options on o.secenekId equals s.secenekId
-            //    join a in fullBlockContext.quests.Where(c => c.anketId == questId) on s.anketId equals a.anketId
+            //    join a in fullBlockContext.quests.Where(c => c.anketId == 2) on s.anketId equals a.anketId
             //    select new FullBlock
             //    {
             //        voteId = o.oyId,
             //        userId = k.kId,
             //        optionId = o.oyId,
             //        optionStr = s.secenek,
-            //        date = Convert.ToDateTime(o.oyTarih),
-            //        blockNo = Convert.ToInt32(b.blockNo),
-            //        nonce = Convert.ToInt32(b.nonce),
+            //        date = (DateTime)o.oyTarih,
+            //        blockNo = (int)b.blockNo,
+            //        nonce = (int)b.nonce,
             //        questId = a.anketId,
             //        questName = a.anketAd,
             //        prevHash = b.prevHash,
             //        blockHash = b.blockHash
             //    };
-            //    return result.ToList();
+            //    var x=result.ToList();
+            //    return x;
             //}
-            
+
+            //var options = db.tblSecenek.Where(x => x.anketId == questId).ToList();
+
+            //for (int i = options.Count()-1; i >=0 ; i--)
+            //{
+            //    options[i].tblOy= db.tblOy.Where(x => x.secenekId == options[i].secenekId).ToList();
+            //    if (options[i].tblOy.Count()==0)
+            //    {
+            //       // options.RemoveAt(i);
+            //    }
+            //}
+
+
+
+
+
+
+
+            //foreach (var option in options)
+            //{
+            //    option.tblOy = db.tblOy.Where(x => x.secenekId == option.secenekId).ToList();
+            //    foreach (var vote in option.tblOy)
+            //    {
+            //        vote.tblBlock = db.tblBlock.Where(x => x.oyId == vote.oyId).ToList();
+            //        //if oy 0 sill
+            //        if (true)
+            //        {
+
+            //        }
+            //    }
+            //}
+
+
+
+
+
+
+
+            return null;
+
         }
     }
 }
