@@ -5,6 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using IronPython.Hosting;
+using System.Net.Http;
+using System.Xml.Serialization;
+using System.Xml.Linq;
+using System.IO;
+using System.Xml;
+using System.Net;
+using System.Text;
 
 namespace HackatonAnketApp.Controllers
 {
@@ -12,45 +20,22 @@ namespace HackatonAnketApp.Controllers
     {
         public ActionResult Index()
         {
+
+            //var pythonLink = @"D:\kubilay\modul.py";
+            //var engine = Python.CreateEngine();
+            //var scope = engine.CreateScope();
+            //var operation = engine.Operations;
+
+            //engine.ExecuteFile(pythonLink, scope);
+            //var sifrelemeYontemleri = scope.GetVariable("sifrelemeYontemleri");
+            //dynamic ins = operation.CreateInstance(sifrelemeYontemleri);
+            //var deneme = ins.sha256Hash("deneme","bu bir metin");
+
+
+            //TCKimlikDogrulama tcDogrula = new TCKimlikDogrulama();
+            //tcDogrula.GetTCKimlikDogrulama(11030516850, "kubilay", "gökay", 2000);
+
             Connect connect = new Connect();
-            var list=connect.ReturnQuestChain(3);
-
-            int x = 1;
-
-
-
-
-            /*------------------------------------*/
-            /*---------------OY VERME-------------*/
-            //int uId = 7;
-            //int chooseId = 1;
-            //DateTime date = DateTime.Now;
-            //int blockNo = 1;
-            //int nonce = 2344;
-            //string prevHash = "öncekiskdjflksdjfkljsdflkjdslkfjksd";
-            //string blockHash = "sondakijsdfkldjflksdklfdksfldksfjkd";
-            //connect.AddVote(uId, chooseId, date, blockNo, nonce, prevHash, blockHash);
-            /*------------------------------------*/
-            /*seçenek ekleme*/
-            //string optionStr = "sad";
-            //int categoryId = 2;
-            //string questName = "seçim anketi";
-            //string questInfo = "bu bir seçim anketidir";
-            //List<tblSecenek> options = new List<tblSecenek>();
-            //tblSecenek option = new tblSecenek()
-            //{
-            //    secenek = optionStr
-            //};
-            //options.Add(option);
-            //tblSecenek option2 = new tblSecenek()
-            //{
-            //    secenek = "asd"
-            //};
-            //options.Add(option2);
-            //connect.AddQuest(categoryId, questName, questInfo, options);
-
-
-
             if (Session["uId"] == null)
             {
                 return RedirectToAction("Login");
@@ -74,5 +59,6 @@ namespace HackatonAnketApp.Controllers
             Session.Clear();
             return RedirectToAction("Login");
         }
+        
     }
 }
