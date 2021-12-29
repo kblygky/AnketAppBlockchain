@@ -133,7 +133,6 @@ namespace HackatonAnketApp.classes
             {
                 item.tblSecenek = db.tblSecenek.Where(x => x.anketId == item.anketId).ToList();
             }
-
             return Quests;
         }
 
@@ -256,7 +255,6 @@ namespace HackatonAnketApp.classes
                 {
                     foreach (var b in vote.tblBlock)
                     {
-
                         FullBlock block = new FullBlock()
                         {
                             voteId = vote.oyId,
@@ -271,15 +269,14 @@ namespace HackatonAnketApp.classes
                             prevHash = b.prevHash,
                             blockHash = b.blockHash
                         };
+
+                        Crypto crypto = new Crypto();
+                        block.blockHash = crypto.Hashing(block.DataConstruct())[1];
+
                         chain.Add(block);
-
                     }
-
-
                 }
-
             }
-
             return chain;
         }
     }

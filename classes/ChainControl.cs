@@ -22,7 +22,6 @@ namespace HackatonAnketApp.classes
                         erorBlock.Add(item.blockNo);
                     }
                 }
-
             }
 
             return erorBlock;

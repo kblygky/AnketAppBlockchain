@@ -36,18 +36,54 @@
                                 <div class="row">
                                     @foreach (var block in item.blocks)
                                     {
-                                        <!---->
-                                        <div class="col-md-6 py-2">
-                                            <a href="/Admin/AdminBlock?blockNo=@block.blockNo&questId=@item.quest.anketId" class="text-decoration-none">
-                                                <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-3 shadow-lg">
-                                                    <div class="d-flex flex-column h-100 px-2 py-3 text-white text-shadow-1">
+                                        if (item.errorBlocks.Count() != 0)
+                                        {
+                                            if (block.blockNo >= item.errorBlocks.Last())
+                                            {
+                                                <!---->
+                                                <div class="col-md-6 py-2">
+                                                    <a href="/Admin/AdminBlock?blockNo=@block.blockNo&questId=@item.quest.anketId" class="text-decoration-none">
+                                                        <div class="card card-cover h-100 overflow-hidden text-white bg-warning rounded-3 shadow-lg">
+                                                            <div class="d-flex flex-column h-100 px-2 py-3 text-white text-shadow-1">
 
-                                                        <h4 class="">@block.blockNo</h4>
-                                                    </div>
+                                                                <h4 class="">@block.blockNo</h4>
+                                                            </div>
+                                                        </div>
+                                                    </a>
                                                 </div>
-                                            </a>
-                                        </div>
-                                        <!---->
+                                                <!---->
+                                            }
+                                            else
+                                            {
+                                                <!---->
+                                                <div class="col-md-6 py-2">
+                                                    <a href="/Admin/AdminBlock?blockNo=@block.blockNo&questId=@item.quest.anketId" class="text-decoration-none">
+                                                        <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-3 shadow-lg">
+                                                            <div class="d-flex flex-column h-100 px-2 py-3 text-white text-shadow-1">
+
+                                                                <h4 class="">@block.blockNo</h4>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <!---->
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <!---->
+                                            <div class="col-md-6 py-2">
+                                                <a href="/Admin/AdminBlock?blockNo=@block.blockNo&questId=@item.quest.anketId" class="text-decoration-none">
+                                                    <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-3 shadow-lg">
+                                                        <div class="d-flex flex-column h-100 px-2 py-3 text-white text-shadow-1">
+
+                                                            <h4 class="">@block.blockNo</h4>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <!---->
+                                        }
                                     }
                                 </div>
                             </div>
