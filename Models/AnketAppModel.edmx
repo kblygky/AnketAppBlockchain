@@ -64,7 +64,7 @@
           <Property Name="oyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="kId" Type="int" />
           <Property Name="secenekId" Type="int" />
-          <Property Name="oyTarih" Type="date" />
+          <Property Name="oyTarih" Type="datetime" />
         </EntityType>
         <EntityType Name="tblSecenek">
           <Key>
@@ -344,7 +344,7 @@ warning 6013: The table/view 'anketApp.dbo.genc' does not have a primary key def
           <Property Name="oyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="kId" Type="Int32" />
           <Property Name="secenekId" Type="Int32" />
-          <Property Name="oyTarih" Type="DateTime" Precision="0" />
+          <Property Name="oyTarih" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tblBlock" Relationship="Self.FK_tblBlock_tblOy" FromRole="tblOy" ToRole="tblBlock" />
           <NavigationProperty Name="tblKullanici" Relationship="Self.FK_tblOy_tblKullanici" FromRole="tblOy" ToRole="tblKullanici" />
           <NavigationProperty Name="tblSecenek" Relationship="Self.FK_tblOy_tblSecenek" FromRole="tblOy" ToRole="tblSecenek" />
@@ -419,7 +419,7 @@ warning 6013: The table/view 'anketApp.dbo.genc' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="anketAppEntities3" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="anketAppEntities5" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="tblAnket" EntityType="Self.tblAnket" />
           <EntitySet Name="tblBlock" EntityType="Self.tblBlock" />
@@ -501,7 +501,7 @@ warning 6013: The table/view 'anketApp.dbo.genc' does not have a primary key def
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="anketAppModelStoreContainer" CdmEntityContainer="anketAppEntities3">
+        <EntityContainerMapping StorageEntityContainer="anketAppModelStoreContainer" CdmEntityContainer="anketAppEntities5">
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="anketAppModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">

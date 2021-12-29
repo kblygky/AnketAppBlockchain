@@ -15,10 +15,10 @@ namespace HackatonAnketApp.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class anketAppEntities3 : DbContext
+    public partial class anketAppEntities5 : DbContext
     {
-        public anketAppEntities3()
-            : base("name=anketAppEntities3")
+        public anketAppEntities5()
+            : base("name=anketAppEntities5")
         {
         }
     
@@ -35,24 +35,24 @@ namespace HackatonAnketApp.Models
         public virtual DbSet<tblOy> tblOy { get; set; }
         public virtual DbSet<tblSecenek> tblSecenek { get; set; }
     
-        [DbFunction("anketAppEntities3", "blockGetir")]
+        [DbFunction("anketAppEntities5", "blockGetir")]
         public virtual IQueryable<blockGetir_Result> blockGetir(Nullable<int> blockNo)
         {
             var blockNoParameter = blockNo.HasValue ?
                 new ObjectParameter("blockNo", blockNo) :
                 new ObjectParameter("blockNo", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<blockGetir_Result>("[anketAppEntities3].[blockGetir](@blockNo)", blockNoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<blockGetir_Result>("[anketAppEntities5].[blockGetir](@blockNo)", blockNoParameter);
         }
     
-        [DbFunction("anketAppEntities3", "kullaniciBlockGetir")]
+        [DbFunction("anketAppEntities5", "kullaniciBlockGetir")]
         public virtual IQueryable<kullaniciBlockGetir_Result> kullaniciBlockGetir(Nullable<int> kId)
         {
             var kIdParameter = kId.HasValue ?
                 new ObjectParameter("kId", kId) :
                 new ObjectParameter("kId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<kullaniciBlockGetir_Result>("[anketAppEntities3].[kullaniciBlockGetir](@kId)", kIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<kullaniciBlockGetir_Result>("[anketAppEntities5].[kullaniciBlockGetir](@kId)", kIdParameter);
         }
     
         public virtual ObjectResult<kategoriAnketSayi_Result> kategoriAnketSayi()

@@ -10,7 +10,7 @@ namespace HackatonAnketApp.classes
 {
     public class Connect
     {
-        anketAppEntities3 db = new anketAppEntities3();
+        anketAppEntities5 db = new anketAppEntities5();
 
         /*kullanıcı kayıt olma kısmı*/
         public void AddUser(string tc, string password, string name, string tel, string address, int age, string education, int rank, string mail)
@@ -35,11 +35,6 @@ namespace HackatonAnketApp.classes
         {
             Connect connect = new Connect();
 
-            //DateTime now = ;
-            //int h = now.Hour;
-            //int m = now.Minute;
-            //int s = now.Second;
-
             tblOy vote = new tblOy()
             {
                 kId = uId,
@@ -48,14 +43,33 @@ namespace HackatonAnketApp.classes
             };
 
 
-
-            /*api ile çekilicek*/
-            int nonce = 1234532;
-            string blockHash = "sonraskdjflksdjfkljsdflkjdslkfjksd";
-
             /*veritabanından çekilicek son blockun numarası çekilicek*/
-            string prevHash = connect.ReturnQuestChain(questId).OrderBy(x => x.blockNo).Last().blockHash;
-            int blockNo = connect.ReturnQuestChain(questId).OrderBy(x => x.blockNo).Last().blockNo;
+            int blockNo;
+            string prevHash;
+
+            try
+            {
+                prevHash = connect.ReturnQuestChain(questId).OrderBy(x => x.blockNo).Last().blockHash;
+                blockNo = connect.ReturnQuestChain(questId).OrderBy(x => x.blockNo).Last().blockNo;
+            }
+            catch
+            {
+                prevHash = "";
+                blockNo = 0;
+            }
+
+            string data= vote.kId + vote.secenekId + vote.oyTarih.ToString() + (blockNo + 1) + questId + prevHash;
+           
+            /*cripto*/
+            Crypto crypto = new Crypto();
+
+            var result = crypto.Hashing(data);
+
+
+            int nonce = Convert.ToInt32(result[0]);
+            string blockHash = result[1];
+
+
 
             tblBlock block = new tblBlock()
             {

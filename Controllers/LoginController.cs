@@ -39,7 +39,11 @@ namespace HackatonAnketApp.Controllers
             }
             else
             {
+                // @Html.Raw(ViewBag.Hata);
                 ViewBag.Hata = "<script>alert(\"Hatalı Giriş\")</script>";
+                //ViewBag.Hata = "<script>sweetAlert('Hata', 'Bir hata oluştu', 'error');</script>";
+                
+
                 return View("Login");
                 //ViewBag.hata = "hatalı giriş";//hata nesajı
                 //return RedirectToAction("Index");

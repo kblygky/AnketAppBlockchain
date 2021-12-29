@@ -20,7 +20,6 @@ namespace HackatonAnketApp.Controllers
     {
         public ActionResult Index()
         {
-
             Connect connect = new Connect();
             if (Session["uId"] == null)
             {

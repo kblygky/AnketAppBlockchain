@@ -23,17 +23,24 @@ namespace HackatonAnketApp.Controllers
         public ActionResult AdminChain()
         {
             if (Session["uId"] == null) return RedirectToAction("Login", "login");
+
+
             Connect connect = new Connect();
             List<QuestChain> questChains = new List<QuestChain>();
             var quests = connect.ReturnQuestList();
 
             foreach (var item in quests)
             {
-                QuestChain chain = new QuestChain()
-                {
-                    quest = item,
-                    blocks = connect.ReturnQuestChain(item.anketId).OrderByDescending(x=>x.blockNo).ToList()
-                };
+
+                QuestChain chain = new QuestChain() { };
+                chain.quest = item;
+                chain.blocks = connect.ReturnQuestChain(item.anketId).OrderByDescending(x => x.blockNo).ToList();
+                    
+
+                ChainControl chainControl = new ChainControl();
+                chain.errorBlocks = chainControl.control(chain.blocks);
+
+
                 questChains.Add(chain);
             }
 
@@ -46,7 +53,7 @@ namespace HackatonAnketApp.Controllers
             Connect connect = new Connect();
             List<FullBlock> blocks = new List<FullBlock>();
             int iBlockNo = Convert.ToInt32(blockNo);
-            blocks = connect.ReturnQuestChain(Convert.ToInt32(questId)).Where(a => a.blockNo >= (iBlockNo - 1)&&a.blockNo<= (iBlockNo + 1)).ToList();
+            blocks = connect.ReturnQuestChain(Convert.ToInt32(questId)).Where(a => a.blockNo >= (iBlockNo - 1)&&a.blockNo<= (iBlockNo + 1)).OrderBy(x => x.blockNo).ToList();
 
 
             return View(blocks);

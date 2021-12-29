@@ -149,7 +149,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="classes\ChainControl.cs" />
     <Compile Include="classes\Connect.cs" />
+    <Compile Include="classes\Crypto.cs" />
     <Compile Include="classes\FullBlock.cs" />
     <Compile Include="classes\QuestChain.cs" />
     <Compile Include="classes\TCKimlikDogrulama.cs" />
@@ -232,6 +234,7 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="libman.json" />
     <EntityDeploy Include="Models\AnketAppModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AnketAppModel.Designer.cs</LastGenOutput>
@@ -239,7 +242,6 @@
     <Content Include="Models\AnketAppModel.edmx.diagram">
       <DependentUpon>AnketAppModel.edmx</DependentUpon>
     </Content>
-    <Content Include="libman.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
