@@ -54,12 +54,13 @@ namespace HackatonAnketApp.classes
             }
             catch
             {
-                prevHash = "";
+                prevHash = "genesis";
                 blockNo = 0;
             }
 
-            string data= vote.kId + vote.secenekId + vote.oyTarih.ToString() + (blockNo + 1) + questId + prevHash;
-           
+            string data = vote.kId + vote.secenekId + vote.oyTarih.ToString() + (blockNo + 1) + questId + prevHash;
+
+
             /*cripto*/
             Crypto crypto = new Crypto();
 
@@ -253,28 +254,33 @@ namespace HackatonAnketApp.classes
                 string questName = db.tblAnket.Where(x => x.anketId == item.anketId).FirstOrDefault().anketAd;
                 foreach (var vote in item.tblOy)
                 {
-
-                    FullBlock block = new FullBlock()
+                    foreach (var b in vote.tblBlock)
                     {
-                        voteId = item.secenekId,
-                        userId = Convert.ToInt32(item.tblOy.First().kId),
-                        optionId = item.secenekId,
-                        optionStr = item.secenek,
-                        date = item.tblOy.First().oyTarih,
-                        blockNo = Convert.ToInt32(vote.tblBlock.First().blockNo),
-                        nonce = Convert.ToInt32(vote.tblBlock.First().nonce),
-                        questId = Convert.ToInt32(item.anketId),
-                        questName = questName,
-                        prevHash = vote.tblBlock.First().prevHash,
-                        blockHash = vote.tblBlock.First().blockHash
-                    };
-                    chain.Add(block);
+
+                        FullBlock block = new FullBlock()
+                        {
+                            voteId = vote.oyId,
+                            userId = Convert.ToInt32(vote.kId),
+                            optionId = item.secenekId,
+                            optionStr = item.secenek,
+                            date = vote.oyTarih,
+                            blockNo = Convert.ToInt32(b.blockNo),
+                            nonce = Convert.ToInt32(b.nonce),
+                            questId = Convert.ToInt32(item.anketId),
+                            questName = questName,
+                            prevHash = b.prevHash,
+                            blockHash = b.blockHash
+                        };
+                        chain.Add(block);
+
+                    }
+
+
                 }
 
             }
 
             return chain;
-
         }
     }
 }

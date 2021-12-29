@@ -15,14 +15,17 @@ namespace HackatonAnketApp.classes
 
             foreach (var item in chain)
             {
-                if (crypto.Hashing(item.DataConstruct())[1]!=item.blockHash)
+                if (item.blockNo != 1)
                 {
-                    erorBlock.Add(item.blockNo);
+                    if (crypto.Hashing(item.DataConstruct())[1] != item.blockHash)
+                    {
+                        erorBlock.Add(item.blockNo);
+                    }
                 }
+
             }
 
-
             return erorBlock;
-        } 
+        }
     }
 }

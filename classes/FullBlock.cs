@@ -8,6 +8,7 @@ namespace HackatonAnketApp.classes
 {
     public class FullBlock
     {   
+        
         [Key]
         public int voteId { get; set; }//oyId
         public int userId { get; set; }//kId
@@ -21,9 +22,10 @@ namespace HackatonAnketApp.classes
         public string prevHash { get; set; }//prevHash*
         public string blockHash { get; set; }//blockHash
 
+        
         public string DataConstruct()
         { 
-            return userId + optionId + date.ToString() + blockNo + questId + prevHash;
+            return this.userId + this.optionId + this.date.ToString() + this.blockNo + this.questId + this.prevHash;
         }
     }
 }

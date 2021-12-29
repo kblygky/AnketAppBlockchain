@@ -25,45 +25,29 @@
                 <!-- Modal Başlagnıc-->
                 <div class="modal fade" id="exampleModal_@item.voteId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <form action="islem.html">
-                        <div class="modal-dialog">
+                        <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Oy Bilgileri</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <!-- Block Başlangıc -->
-                                    <table class="table table-bordered">
-                                        <tr>
-                                            <td>Block No:</td>
-                                            <td>@item.blockNo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Nonce Değeri:</td>
-                                            <td>@item.nonce</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Anket Adı:</td>
-                                            <td>@item.questName</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Seçim:</td>
-                                            <td>@item.optionStr</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tarih:</td>
-                                            <td>@item.date</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Önceki Has:</td>
-                                            <td>@item.prevHash</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Has:</td>
-                                            <td>@item.blockHash</td>
-                                        </tr>
-                                    </table>
-                                    <!-- Block Bitiş -->
+
+                                    <p class="card-title"><b>Block No : </b>@item.blockNo</p>
+                                    <hr>
+                                    <p class="card-title"><b>Nonce Değeri : </b>@item.nonce</p>
+                                    <hr>
+                                    <p class="card-title"><b>Anket Adı : </b>@item.questName</p>
+                                    <hr>
+                                    <p class="card-title"><b>Seçim : </b>@item.optionStr</p>
+                                    <hr>
+                                    <p class="card-title"><b>Tarih : </b>@item.date</p>
+                                    <hr>
+                                    <h6 class="card-title">Önceki Hash :</h6>
+                                    <p class="card-text">@item.prevHash</p>
+                                    <hr>
+                                    <h6 class="card-title">Hash : </h6>
+                                    <p class="card-text">@item.blockHash</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
