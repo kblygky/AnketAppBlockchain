@@ -38,7 +38,7 @@ namespace HackatonAnketApp.Controllers
             Connect connect = new Connect();
             if (Session["uId"] == null)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Login","login");
             }
             else
             {
@@ -47,17 +47,10 @@ namespace HackatonAnketApp.Controllers
             return View(connect.ReturnQuestList());
         }
 
-
-        public ActionResult Login()
-        {
-            ViewBag.Message = "";
-            return View();
-        }
-
         public ActionResult BtnExit()
         {
             Session.Clear();
-            return RedirectToAction("Login");
+            return RedirectToAction("Login","Login");
         }
         
     }

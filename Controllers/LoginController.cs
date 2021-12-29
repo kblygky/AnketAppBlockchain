@@ -9,6 +9,11 @@ namespace HackatonAnketApp.Controllers
 {
     public class LoginController : Controller
     {
+        public ActionResult Login()
+        {
+            ViewBag.Message = "";
+            return View();
+        }
         // GET: Login
         [HttpPost]
         public ActionResult BtnLogin(string mail, string password)
@@ -19,8 +24,8 @@ namespace HackatonAnketApp.Controllers
             var user = connect.CheckLogin(mail, password);
             if (user != null)
             {
-                if (user.durum==1)return RedirectToAction("Index", "Admin");
-                
+                if (user.durum == 1) return RedirectToAction("Index", "Admin");
+
                 Session["uName"] = user.adSoyad;
                 Session["uId"] = user.kId;
                 Session["tc"] = user.tc;
@@ -29,22 +34,39 @@ namespace HackatonAnketApp.Controllers
                 Session["education"] = user.ogrenimDurum;
                 Session["mail"] = user.mail;
                 Session["sifre"] = user.sifre;
+                return RedirectToAction("Index", "Home");
             }
             else
             {
+                ViewBag.Hata = "<script>alert(\"Hatalı Giriş\")</script>";
+                return View("Login");
                 //ViewBag.hata = "hatalı giriş";//hata nesajı
                 //return RedirectToAction("Index");
             }
-            return RedirectToAction("Index","Home");
+            
         }
 
         [HttpPost]
-        public ActionResult BtnRegister(string tc,string password,string name,string tel,string address,string age,string education,string mail)
+        public ActionResult BtnRegister(string tc, string password, string name, string tel, string address, string age, string education, string mail)
         {
             Connect connect = new Connect();
-            connect.AddUser(tc, password, name, tel, address, Convert.ToInt32(age), education, 0, mail);
+            TCKimlikDogrulama tcDogrula = new TCKimlikDogrulama();
+            var uName = name.Split();
 
-            return RedirectToAction("Login", "Home");
+            var x = tcDogrula.GetTCKimlikDogrulama(Convert.ToUInt64(tc), uName[0], uName[1], UInt16.Parse(age));
+            if (x == "tamam")
+            {
+                connect.AddUser(tc, password, name, tel, address, (2021 - Convert.ToInt32(age)), education, 0, mail);
+            }
+            else
+            {
+                ViewBag.Hata = "<script>alert(\"Hatalı Tc\")</script>";
+                return View("login");
+            }
+
+
+
+            return View("login");
         }
         [HttpPost]
         public ActionResult BtnUpdate(string tc, string password, string name, string tel, string age, string education, string mail)
@@ -56,19 +78,3 @@ namespace HackatonAnketApp.Controllers
         }
     }
 }
-
-///*-------------------REGISTER----------------------*/
-//string tc = "45674255256";
-//string password = "123123";
-//string name = "mahmut tuncer";
-//string tel = "5312441068";
-//string address = "adıyaman";
-//int age = 21;
-//string education = "üniversite";
-//int rank = 0;
-//string mail = "kubilayogge110@gmail.com";
-//kullanıcı ekleme
-//connect.AddUser(tc, password, name, tel, address, age, education, rank, mail);
-
-//login kontrol 
-//tblKullanici user = connect.CheckLogin(mail, password);

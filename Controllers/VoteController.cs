@@ -26,8 +26,8 @@ namespace HackatonAnketApp.Controllers
         {
             Connect connect = new Connect();
             connect.AddVote(Convert.ToInt32(Session["uId"]), Convert.ToInt32(optionId), Convert.ToInt32(questId));
-
-            return RedirectToAction("MyVotes","Vote");
+            //ViewBag.Message= "<script>alert(\"OyEklendi\")</script>";
+            return RedirectToAction("MyVotes");
         }
 
     }

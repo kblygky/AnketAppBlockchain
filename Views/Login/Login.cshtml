@@ -22,6 +22,9 @@
     <!-- Local -->
     <link rel="stylesheet" href="~/style/login-style.css">
 
+    @Html.Raw(ViewBag.Hata);
+
+
 </head>
 <body class="bg-light">
     <div class="d-flex justify-content-center align-items-center mt-5">
@@ -48,13 +51,13 @@
                     <div class="form">
                         <form action="/Login/BtnRegister" method="post">
                             <input type="text" name="name" class="form-control" placeholder="Ad Soyad" required>
-                            <input type="text" name="tc" class="form-control" placeholder="TC" required>
+                            <input type="text" name="tc" class="form-control" placeholder="TC" minlength="11" maxlength="11" required>
                             <input type="text" name="tel" class="form-control" placeholder="Telefon" required>
                             <input type="text" name="address" class="form-control" placeholder="Adres" required>
-                            <input type="text" name="age" class="form-control" placeholder="Yaş" required>
+                            <input type="text" name="age" class="form-control" placeholder="Doğum Yılı" required>
                             <input type="text" name="education" class="form-control" placeholder="Öğrenim Durumu">
-                            <input type="text" name="mail" class="form-control" placeholder="Mail" required>
-                            <input type="password" name="password" class="form-control" placeholder="Şifre" required>
+                            <input type="email" name="mail" class="form-control" placeholder="Mail" required>
+                            <input type="password" name="password" class="form-control" placeholder="Şifre" minlength="3" maxlength="6"  required>
                             <button type="submit" class="btn btn-primary btn-block">Kayıt Ol</button>
                         </form>
                     </div>
