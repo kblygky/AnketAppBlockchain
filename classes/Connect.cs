@@ -230,21 +230,26 @@ namespace HackatonAnketApp.classes
             foreach (var item in options)
             {
                 string questName = db.tblAnket.Where(x => x.anketId == item.anketId).FirstOrDefault().anketAd;
-                FullBlock block = new FullBlock()
+                foreach (var vote in item.tblOy)
                 {
-                    voteId = item.secenekId,
-                    userId =Convert.ToInt32( item.tblOy.First().kId),
-                    optionId=item.secenekId,
-                    optionStr=item.secenek,
-                    date=item.tblOy.First().oyTarih,
-                    blockNo= Convert.ToInt32(item.tblOy.First().tblBlock.First().oyId),
-                    nonce= Convert.ToInt32(item.tblOy.First().tblBlock.First().nonce),
-                    questId=Convert.ToInt32( item.anketId),
-                    questName=questName,
-                    prevHash= item.tblOy.First().tblBlock.First().prevHash,
-                    blockHash= item.tblOy.First().tblBlock.First().blockHash
-                };
-                chain.Add(block);
+
+                    FullBlock block = new FullBlock()
+                    {
+                        voteId = item.secenekId,
+                        userId = Convert.ToInt32(item.tblOy.First().kId),
+                        optionId = item.secenekId,
+                        optionStr = item.secenek,
+                        date = item.tblOy.First().oyTarih,
+                        blockNo = Convert.ToInt32(vote.tblBlock.First().blockNo),
+                        nonce = Convert.ToInt32(vote.tblBlock.First().nonce),
+                        questId = Convert.ToInt32(item.anketId),
+                        questName = questName,
+                        prevHash = vote.tblBlock.First().prevHash,
+                        blockHash = vote.tblBlock.First().blockHash
+                    };
+                    chain.Add(block);
+                }
+
             }
 
             return chain;
