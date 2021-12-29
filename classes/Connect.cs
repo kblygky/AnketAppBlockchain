@@ -46,13 +46,15 @@ namespace HackatonAnketApp.classes
             string blockHash = "sonraskdjflksdjfkljsdflkjdslkfjksd";
 
             /*veritabanından çekilicek son blockun numarası çekilicek*/
-            int blockNo = 1;
-            string prevHash = "öncekiskdjflksdjfkljsdflkjdslkfjksd";
 
 
+            Connect connect = new Connect();
+
+            string prevHash = connect.ReturnQuestChain(questId).OrderBy(x => x.blockNo).Last().blockHash;
+            int blockNo = connect.ReturnQuestChain(questId).OrderBy(x => x.blockNo).Last().blockNo;
             tblBlock block = new tblBlock()
             {
-                blockNo = blockNo,
+                blockNo = blockNo + 1,
                 nonce = nonce,
                 prevHash = prevHash,
                 blockHash = blockHash,
