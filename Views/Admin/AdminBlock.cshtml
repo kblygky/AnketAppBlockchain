@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "AdminBlock";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+    <section id="contend">
+        <div class="container px-4 py-5 pb-3">
+            <h2 class="pb-2 border-bottom">
+                Anket Adı Chain
+                <!-- Modal Triger-->
+            </h2>
+        </div>
+
+        <!-- Bloklar-->
+        <div class="container px-4">
+
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+                @using HackatonAnketApp.classes;
+
+                @model List<FullBlock>
+                @foreach (var item in Model)
+                {
+                    <!---->
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                            <div class="card-header py-3 text-white bg-primary border-primary">
+                                <h4 class="my-0 fw-normal">@item.blockNo</h4>
+                            </div>
+                            <div class="card-body">
+                                <table class="d-flex justify-content-center">
+                                    <tr>
+                                        <td>User ID : </td>
+                                        <td>@item.userId</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Seçenek:</td>
+                                        <td>@item.optionId / @item.optionStr</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tarih : </td>
+                                        <td>@item.date</td>
+                                    </tr>
+                                    <tr>
+                                        <td>nonce : </td>
+                                        <td>@item.nonce</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Anket : </td>
+                                        <td>@item.questId / @item.questName</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PrevHash : </td>
+                                        <td>@item.prevHash</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hash : </td>
+                                        <td>@item.blockHash</td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!---->
+                }
+
+            </div>
+
+        </div>
+
+        </div>
+    </section>

@@ -33,6 +33,9 @@ namespace HackatonAnketApp.classes
 
         public void AddVote(int uId, int chooseId, int questId)
         {
+            Connect connect = new Connect();
+
+
 
             tblOy vote = new tblOy()
             {
@@ -41,17 +44,16 @@ namespace HackatonAnketApp.classes
                 oyTarih = DateTime.Now
             };
 
+
+
             /*api ile çekilicek*/
             int nonce = 1234532;
             string blockHash = "sonraskdjflksdjfkljsdflkjdslkfjksd";
-
+            
             /*veritabanından çekilicek son blockun numarası çekilicek*/
-
-
-            Connect connect = new Connect();
-
             string prevHash = connect.ReturnQuestChain(questId).OrderBy(x => x.blockNo).Last().blockHash;
             int blockNo = connect.ReturnQuestChain(questId).OrderBy(x => x.blockNo).Last().blockNo;
+            
             tblBlock block = new tblBlock()
             {
                 blockNo = blockNo + 1,

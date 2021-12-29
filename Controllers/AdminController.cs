@@ -29,7 +29,7 @@ namespace HackatonAnketApp.Controllers
                 QuestChain chain = new QuestChain()
                 {
                     quest = item,
-                    blocks = connect.ReturnQuestChain(item.anketId).OrderBy(x=>x.blockNo).ToList()
+                    blocks = connect.ReturnQuestChain(item.anketId).OrderByDescending(x=>x.blockNo).ToList()
                 };
                 questChains.Add(chain);
             }
@@ -37,7 +37,18 @@ namespace HackatonAnketApp.Controllers
             return View(questChains);
         }
 
-        [HttpPost]
+        public ActionResult AdminBlock(string blockNo,string questId)
+        {
+            Connect connect = new Connect();
+            List<FullBlock> blocks = new List<FullBlock>();
+            int iBlockNo = Convert.ToInt32(blockNo);
+            blocks = connect.ReturnQuestChain(Convert.ToInt32(questId)).Where(a => a.blockNo >= (iBlockNo - 1)&&a.blockNo<= (iBlockNo + 1)).ToList();
+
+
+            return View(blocks);
+        }
+
+            [HttpPost]
         public ActionResult BtnAddQuest(string questName, string questInfo, string optionStr)
         {   //"deneme1\r\ndeneme2\r\ndeneme3"
             List<tblSecenek> options = new List<tblSecenek>();

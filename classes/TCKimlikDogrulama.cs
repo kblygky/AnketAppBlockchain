@@ -209,7 +209,7 @@ namespace HackatonAnketApp.classes
             }
             catch (Exception ex)
             {
-                return "TC Kimlik No Doğrulanamadı.";
+                return "TC Kimlik No Doğrulanamadı."+ex.ToString();
             }
         }
     }
