@@ -13,6 +13,7 @@ namespace HackatonAnketApp.Controllers
 
         public ActionResult MyVotes()
         {
+            if (Session["uId"] == null) return RedirectToAction("Login", "login");
             // var list = connect.ReturnUserBlocks(7);
             ViewBag.Message = "";
             Connect connect = new Connect();

@@ -24,7 +24,6 @@ namespace HackatonAnketApp.Controllers
             var user = connect.CheckLogin(mail, password);
             if (user != null)
             {
-                if (user.durum == 1) return RedirectToAction("Index", "Admin");
 
                 Session["uName"] = user.adSoyad;
                 Session["uId"] = user.kId;
@@ -34,7 +33,9 @@ namespace HackatonAnketApp.Controllers
                 Session["education"] = user.ogrenimDurum;
                 Session["mail"] = user.mail;
                 Session["sifre"] = user.sifre;
+                if (user.durum == 1) return RedirectToAction("Index", "Admin");
                 return RedirectToAction("Index", "Home");
+
             }
             else
             {
@@ -43,7 +44,7 @@ namespace HackatonAnketApp.Controllers
                 //ViewBag.hata = "hatalı giriş";//hata nesajı
                 //return RedirectToAction("Index");
             }
-            
+
         }
 
         [HttpPost]

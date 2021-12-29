@@ -15,11 +15,14 @@ namespace HackatonAnketApp.Controllers
         // GET: Admin
         public ActionResult Index()
         {
+            if (Session["uId"] == null)return RedirectToAction("Login", "login");
+
             Connect connect = new Connect();
             return View(connect.ReturnQuestList());
         }
         public ActionResult AdminChain()
         {
+            if (Session["uId"] == null) return RedirectToAction("Login", "login");
             Connect connect = new Connect();
             List<QuestChain> questChains = new List<QuestChain>();
             var quests = connect.ReturnQuestList();
@@ -39,6 +42,7 @@ namespace HackatonAnketApp.Controllers
 
         public ActionResult AdminBlock(string blockNo,string questId)
         {
+            if (Session["uId"] == null) return RedirectToAction("Login", "login");
             Connect connect = new Connect();
             List<FullBlock> blocks = new List<FullBlock>();
             int iBlockNo = Convert.ToInt32(blockNo);

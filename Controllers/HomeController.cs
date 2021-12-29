@@ -21,20 +21,6 @@ namespace HackatonAnketApp.Controllers
         public ActionResult Index()
         {
 
-            //var pythonLink = @"D:\kubilay\modul.py";
-            //var engine = Python.CreateEngine();
-            //var scope = engine.CreateScope();
-            //var operation = engine.Operations;
-
-            //engine.ExecuteFile(pythonLink, scope);
-            //var sifrelemeYontemleri = scope.GetVariable("sifrelemeYontemleri");
-            //dynamic ins = operation.CreateInstance(sifrelemeYontemleri);
-            //var deneme = ins.sha256Hash("deneme","bu bir metin");
-
-
-            //TCKimlikDogrulama tcDogrula = new TCKimlikDogrulama();
-            //tcDogrula.GetTCKimlikDogrulama(11030516850, "kubilay", "gökay", 2000);
-
             Connect connect = new Connect();
             if (Session["uId"] == null)
             {
