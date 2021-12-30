@@ -10,7 +10,7 @@ Projemizin içeriği, Açık Oylama sistemi similasyonudur diyebiliriz.E-oylama 
 - *Berke Kocabalkan-182804002*
 
 
-Projemiz bünyesinde bulundurduğumuz seneryolar 
+Projemiz bünyesinde bulundurduğumuz senaryolar 
 ```
 -Sisteme Kayıt Olma
 -Sisteme ( Kullanıcı - Admin ) Giriş Yapabilme.
