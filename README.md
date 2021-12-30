@@ -10,7 +10,7 @@ Projemizin içeriği, Açık Oylama sistemi similasyonudur diyebiliriz.E-oylama 
 - *Berke Kocabalkan-182804002*
 
 
-###Projemiz bünyesinde bulundurduğumuz seneryolar 
+Projemiz bünyesinde bulundurduğumuz seneryolar 
 ```
 -Sisteme Kayıt Olma
 -Sisteme ( Kullanıcı - Admin ) Giriş Yapabilme.
@@ -18,7 +18,7 @@ Projemizin içeriği, Açık Oylama sistemi similasyonudur diyebiliriz.E-oylama 
 -Sisteme Anket Ekleyebilme  (Admin izni gerektir)
 ```
 
-###Kullanılan Teknolojiler
+Kullanılan Teknolojiler
 ```
 -ASP .NET MVC
 -Html, css, javascript
