@@ -1,6 +1,6 @@
 # AnketAppBlockchain
 
-Projemizin içeriği, Açık Oylama sistemi simülasyonudur diyebiliriz.E-oylama sistemi sayesinde blockchain kullanılarak oylarımızın güvenliğisistem tarafından otomatik olarak sağlanacaktır.
+Projemizin içeriği, Açık Oylama sistemi simülasyonudur diyebiliriz.E-oylama sistemi sayesinde blockchain kullanılarak oylarımızın güvenliği sistem tarafından otomatik olarak sağlanacaktır.
 
 **Grup Üyeleri**
 - *Ayşe Aleyna Yavuz-192802024*
@@ -12,18 +12,18 @@ Projemizin içeriği, Açık Oylama sistemi simülasyonudur diyebiliriz.E-oylama
 
 Projemiz bünyesinde bulundurduğumuz senaryolar 
 ```
--Sisteme Kayıt Olma
--Sisteme ( Kullanıcı - Admin ) Giriş Yapabilme.
--Sistemdeki anketlere katılım sağlayarak oy verebilme .
--Sisteme Anket Ekleyebilme  (Admin izni gerektir)
+Sisteme Kayıt Olma
+Sisteme ( Kullanıcı - Admin ) Giriş Yapabilme.
+Sistemdeki anketlere katılım sağlayarak oy verebilme .
+Sisteme Anket Ekleyebilme  (Admin izni gerektir)
 ```
 
 Kullanılan Teknolojiler
 ```
--ASP .NET MVC
--Html, css, javascript
--Bootstrap
--Entity Framework
--SQL Server Management Studio
+ASP .NET MVC
+Html, css, javascript
+Bootstrap
+Entity Framework
+SQL Server Management Studio
 ```
 
