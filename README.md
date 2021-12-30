@@ -21,7 +21,8 @@ Sisteme Anket Ekleyebilme  (Admin izni gerektir)
 Kullanılan Teknolojiler
 ```
 ASP .NET MVC
-Html, css, javascript
+Html, css
+jquery
 Bootstrap
 Entity Framework
 SQL Server Management Studio
