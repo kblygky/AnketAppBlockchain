@@ -1,4 +1,7 @@
 # AnketAppBlockchain
+
+-Projemizin içeriği, Açık Oylama sistemi similasyonudur diyebiliriz.E-oylama sistemi sayesinde blockchain kullanılarak oylarımızın güvenliğisistem tarafından otomatik olarak sağlanacaktır.
+
 **Grup Üyeleri**
 - *Ayşe Aleyna Yavuz-192802024*
 - *Murat Akçay-192802083*
@@ -7,3 +10,15 @@
 - *Berke Kocabalkan-182804002*
 
 
+###Projemiz bünyesinde bulundurduğumuz seneryolar ;
+-Sisteme Kayıt Olma
+-Sisteme ( Kullanıcı - Admin ) Giriş Yapabilme.
+-Sistemdeki anketlere katılım sağlayarak oy verebilme .
+-Sisteme Anket Ekleyebilme  (Admin izni gerektir)
+
+###Kullanılan Teknolojiler
+-ASP .NET MVC
+-Html, css, javascript
+-Bootstrap
+-Entity Framework
+-SQL Server Management Studio
