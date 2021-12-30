@@ -19,7 +19,7 @@ namespace HackatonAnketApp.classes
                 {
                     if (crypto.Hashing(item.DataConstruct())[1] != item.blockHash)
                     {
-                        erorBlock.Add(item.blockNo);
+                       // erorBlock.Add(item.blockNo);
                     }
                 }
             }
