@@ -11,12 +11,14 @@ Projemizin içeriği, Açık Oylama sistemi similasyonudur diyebiliriz.E-oylama 
 
 
 ###Projemiz bünyesinde bulundurduğumuz seneryolar 
+```
 -Sisteme Kayıt Olma
 -Sisteme ( Kullanıcı - Admin ) Giriş Yapabilme.
 -Sistemdeki anketlere katılım sağlayarak oy verebilme .
 -Sisteme Anket Ekleyebilme  (Admin izni gerektir)
+```
 
-#Kullanılan Teknolojiler
+###Kullanılan Teknolojiler
 ```
 -ASP .NET MVC
 -Html, css, javascript
