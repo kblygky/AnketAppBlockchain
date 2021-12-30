@@ -1,6 +1,6 @@
 # AnketAppBlockchain
 
-Projemizin içeriği, Açık Oylama sistemi similasyonudur diyebiliriz.E-oylama sistemi sayesinde blockchain kullanılarak oylarımızın güvenliğisistem tarafından otomatik olarak sağlanacaktır.
+Projemizin içeriği, Açık Oylama sistemi simülasyonudur diyebiliriz.E-oylama sistemi sayesinde blockchain kullanılarak oylarımızın güvenliğisistem tarafından otomatik olarak sağlanacaktır.
 
 **Grup Üyeleri**
 - *Ayşe Aleyna Yavuz-192802024*
