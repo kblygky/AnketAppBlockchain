@@ -27,9 +27,6 @@ Bootstrap
 Entity Framework
 SQL Server Management Studio
 ```
-Kullanıcı Arayüzü
--Program içerisindeki tüm arayüz görüntüleri ve işlevlerine bakalım.
-
 
 
 
